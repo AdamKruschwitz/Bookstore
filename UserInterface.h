@@ -1,0 +1,16 @@
+//
+// Created by Jeremy Timmins on 11/30/17.
+//
+
+#ifndef BOOKSTORE_2_ELECTRIC_BOOGALOO_USERINTERFACE_H
+#define BOOKSTORE_2_ELECTRIC_BOOGALOO_USERINTERFACE_H
+
+
+class UserInterface {
+
+
+
+};
+
+
+#endif //BOOKSTORE_2_ELECTRIC_BOOGALOO_USERINTERFACE_H
