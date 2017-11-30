@@ -32,6 +32,7 @@ public:
     void setPrice(double newPrice);
     void setTitle(std::string newTitle);
     void addToWaitingList(Person newPerson);
+    void removeFromWaitingList();
     int calculateRestock();
     void restock(int numNewCopies);
 };

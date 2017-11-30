@@ -3,6 +3,7 @@
 //
 
 #include "Book.h"
+#include <iostream>
 
 Book::Book() {
     have = 0;
@@ -79,3 +80,10 @@ void Book::addToWaitingList(Person person) {
     waitingList.enqueue(person);
 }
 
+void Book::removeFromWaitingList() {
+    Person removedPerson = waitingList.dequeue();
+    std::string out = removedPerson.getName();
+    out += " preferred contact method: ";
+    out += removedPerson.getPreferredContactInfo();
+    std::cout << out << std::endl;
+}
