@@ -6,6 +6,7 @@
 #include <iostream>
 #include "Book.h"
 #include "Book.cpp"
+using namespace std;
 
 void help(){
     //lists commands
@@ -97,5 +98,42 @@ void quit(){
 }
 void run(){
     std::cout << "Welcome to BookStore 2: Electric Boogaloo!\n Please enter a command" << std::endl;
+    std::string input ="";
+    getline(cin,input);
+
+    //not sure if this works or not
+    input = tolower(input);
+
+    if (input=="h"){
+        help();
+    }
+    if(input=="i"){
+        //run inquire function
+    }
+    if(input=="l"){
+        list();
+    }
+    if(input=="a"){
+        //run add function
+    }
+    if(input=="m"){
+        //run modify function
+    }
+    if(input=="s"){
+        //run sell function
+    }
+    if(input=="o"){
+        //run order function
+    }
+    if(input=="d"){
+        //run delivery function
+    }
+    if(input=="r"){
+        //run returnFunction
+    }
+    if(input=="q"){
+        quit();
+    }
+
 
 }
