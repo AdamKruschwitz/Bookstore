@@ -9,6 +9,11 @@
 class Person {
 private:
     std::string name;
+    std::string number;
+    std::string email;
+    std::string preference;
 };
+
+
 
 #endif //RANDOMBOOKNAMEGENERATOR_PERSON_H
