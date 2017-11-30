@@ -21,7 +21,7 @@ private:
 public:
     Book();
     Book(std::string title);
-    Book(Book bookToCopy);
+    Book(Book& bookToCopy);
     ~Book();
     int getHave();
     int getWant();

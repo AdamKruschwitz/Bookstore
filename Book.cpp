@@ -18,8 +18,10 @@ Book::Book(std::string title) {
     price = 0.0;
 }
 
-Book::Book(Book bookToCopy) {
-    delete waitingList;
+Book::Book(Book& bookToCopy) {
+    //delete waitingList;
+    //need a new way to delete waitingList
+    waitingList.~LinkedQueue();
     waitingList = LinkedQueue<Person>(bookToCopy.waitingList);
     have = bookToCopy.have;
     want = bookToCopy.want;
@@ -28,7 +30,7 @@ Book::Book(Book bookToCopy) {
 }
 
 Book::~Book() {
-    delete waitingList;
+    waitingList.~LinkedQueue();
 }
 
 int Book::getHave() {

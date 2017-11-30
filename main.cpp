@@ -1,5 +1,5 @@
 #include <iostream>
-#include "book.h"
+#include "Book.h"
 
 void testGetAndSetFunctions() {
     Book mobyDick = Book("Moby Dick");

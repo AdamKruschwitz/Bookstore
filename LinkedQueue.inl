@@ -11,19 +11,20 @@ LinkedQueue<T>::LinkedQueue(){
 }
 
 //Copy Constructor
+template <class T>
 LinkedQueue<T>::LinkedQueue(const LinkedQueue& queueToCopy){
     if (queueToCopy.front == nullptr){
         front = nullptr;
         end = nullptr;
     }
     else {
-        LinkedNode* nodeToCopy = queueToCopy.front;
-        front = new LinkedNode(nodeToCopy->getItem());
-        LinkedNode* endOfNewChain = front;
+        LinkedNode<T>* nodeToCopy = queueToCopy.front;
+        front = new LinkedNode<T>(nodeToCopy->getItem());
+        LinkedNode<T>* endOfNewChain = front;
 
         nodeToCopy = nodeToCopy->getNext();
         while (nodeToCopy != nullptr){
-            LinkedNode* newNode = new LinkedNode(nodeToCopy->getItem());
+            LinkedNode<T>* newNode = new LinkedNode<T>(nodeToCopy->getItem());
             endOfNewChain->setNext(newNode);
             endOfNewChain = newNode;
             nodeToCopy = nodeToCopy->getNext();
@@ -33,9 +34,10 @@ LinkedQueue<T>::LinkedQueue(const LinkedQueue& queueToCopy){
 }
 
 //Destructor
+template <class T>
 LinkedQueue<T>::~LinkedQueue(){
     while (front != nullptr){
-        LinkedNode* toDelete = end;
+        LinkedNode<T>* toDelete = end;
         front = front->getNext();
         delete toDelete;
     }
@@ -43,6 +45,7 @@ LinkedQueue<T>::~LinkedQueue(){
 
 
 //adds an item to the end of the queue
+template <class T>
 void LinkedQueue<T>::enqueue(T item){
     LinkedNode<T>* newNode = new LinkedNode<T>(item);
     //if front is nullptr, end should be nullptr too
@@ -58,6 +61,7 @@ void LinkedQueue<T>::enqueue(T item){
 
 //takes an item off the front of the queue and returns it
 //throws out_of_range exception if the queue is empty
+template <class T>
 T LinkedQueue<T>::dequeue(){
     if (isEmpty()){
         throw std::out_of_range("Can't dequeue from empty queue");
@@ -69,7 +73,7 @@ T LinkedQueue<T>::dequeue(){
             front = nullptr;
             end = nullptr;
         } else {
-            LinkedNode* toDelete = front;
+            LinkedNode<T>* toDelete = front;
             front = front->getNext();
             delete toDelete;
         }
@@ -78,6 +82,7 @@ T LinkedQueue<T>::dequeue(){
 }
 
 //returns true if the queue has no items, false otherwise
+template <class T>
 bool LinkedQueue<T>::isEmpty(){
     return front == nullptr;
 }
