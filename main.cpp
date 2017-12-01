@@ -1,5 +1,7 @@
 #include <iostream>
 #include "Book.h"
+#include "UserInterface.h"
+
 
 void testGetAndSetFunctions() {
     Book* mobyDick = new Book("Moby Dick");
@@ -42,5 +44,11 @@ void testRestock() {
 
 int main() {
     testGetAndSetFunctions();
+
+    UserInterface ui;
+    ui.run();
+
+
+
     return 0;
 }

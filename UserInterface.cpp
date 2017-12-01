@@ -6,13 +6,34 @@
 #include <iostream>
 #include "Book.h"
 #include "Book.cpp"
+#include "ArrayList.h"
 using namespace std;
 
 void help(){
     //lists commands
+    std::cout << "Keyboard shortcut \t command \t description" << std::endl;
+    std::cout <<"i \t inquire \t Displays information for a specified title" << std::endl;
+    std::cout <<"l \t list \t List the information for the entire inventory (in alphabetical order)" << std::endl;
+    std::cout <<"a \t add \t Adds a book to the inventory" << std::endl;
+    std::cout <<"m \t modify \t Modify the values of a specified title" << std::endl;
+    std::cout <<"s \t sell \t Decreases the count for a specified title by one" << std::endl;
+    std::cout <<"o \t order \t Create a bulk purchase order for additional books based on how many are needed" << std::endl;
+    std::cout <<"d \t delivery \t Take information from a file listing the delivery shipment of books" << std::endl;
+    std::cout <<"r \t return \t Writes a return invoice to a file specifying all books to be returned" << std::endl;
+    std::cout <<"q \t quit \t Saves the inventory and wait lists in a file and closes the program" << std::endl;
+
 }
 
-void inquire(Book& title){
+void inquire(std::string title){
+    //find matching book
+    //print out info
+    Book current = ArrayList.find(title); //doesnt work yet
+
+    std::cout << current.getTitle() << std::endl;
+    std::cout << "Have Value = " << current.getHave()<< std::endl;
+    std::cout << "Want Value = " << current.getWant() << std::endl;
+    std::cout << "Current Price = $" << current.getPrice() << std::endl;
+    //print out wait list next
     //Display info for a title
 }
 
@@ -100,7 +121,7 @@ void run(){
 
     std::string input ="";
     while (input != "q"){
-        std::cout << "Welcome to BookStore 2: Electric Boogaloo!\n Please enter a command" << std::endl;
+        std::cout << "Welcome to BookStore 2: Electric Boogaloo!\n Please enter a command, or type in 'h' for help" << std::endl;
 
         getline(cin,input);
 
@@ -111,6 +132,9 @@ void run(){
             help();
         }
         if(input=="i"){
+            std::cout << "Please type in a title to inquire about" << endl;
+            getline(cin,input);
+            inquire(input);
             //run inquire function
         }
         if(input=="l"){
