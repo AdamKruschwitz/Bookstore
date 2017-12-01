@@ -5,4 +5,33 @@
 #ifndef BOOKSTORE_2_ELECTRIC_BOOGALOO_BOOKSTORE_H
 #define BOOKSTORE_2_ELECTRIC_BOOGALOO_BOOKSTORE_H
 
+#include "ArrayList.h"
+#include "Book.h"
+#include "Person.h"
+#include <string>
+
+class Bookstore {
+private:
+    ArrayList* bookList = nullptr;
+
+public:
+    /**
+     * A default constructor, creates the booklist and runs load library
+     */
+    Bookstore();
+
+    /**
+     * A destructor, runs load library and destroys the bookList
+     */
+    ~Bookstore();
+
+    /**
+     * Add's a book to the bookList
+     * @param newTitle title of the book to be added
+     * @post a new book object is created of the given title,
+     */
+    void addBook(std::string newTitle);
+    void saveLibrary();
+    void loadLibrary();
+};
 #endif //BOOKSTORE_2_ELECTRIC_BOOGALOO_BOOKSTORE_H

@@ -1,4 +1,5 @@
 #include <iostream>
+#include "UserInterface.h"
 #include "Book.h"
 
 void testGetAndSetFunctions() {
