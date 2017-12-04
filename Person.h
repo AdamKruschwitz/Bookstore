@@ -61,6 +61,7 @@ public:
      * @param preference is the string that holds the persons preference either call, text, or email
      * @post preference is updated and set
      */
+    std::string getPreferredContactInfo();
 
 };
 
