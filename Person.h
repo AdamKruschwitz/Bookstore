@@ -37,25 +37,25 @@ public:
     * @returns either call, text, or email, and the corresponding number or email
     */
 
-    void setName(std::string name);
+    void setName(std::string nameIn);
     /**
      * sets the name of the person
      * @param name is the string that holds the persons name
      * @post name is updated and set
      */
-    void setNumber(std::string number);
+    void setNumber(std::string numberIn);
     /**
      * sets the number of the person
      * @param number is the string that holds the persons number
      * @post number is updated and set
      */
-    void setEmail(std::string email);
+    void setEmail(std::string emailIn);
     /**
      * sets the email of the person
      * @param email is the string that holds the persons name
      * @post email is updated and set
      */
-    void setPreference(std::string preference);
+    void setPreference(std::string preferenceIn);
     /**
      * sets the preference of the person
      * @param preference is the string that holds the persons preference either call, text, or email
