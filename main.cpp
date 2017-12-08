@@ -46,6 +46,11 @@ void testRestock() {
 int main() {
     testGetAndSetFunctions();
 
+    Book* book1 = new Book("first");
+    Book* book2 = new Book("second");
+
+    std::cout << (book1==book2) << std::endl;
+
     UserInterface ui;
     ui.run();
 

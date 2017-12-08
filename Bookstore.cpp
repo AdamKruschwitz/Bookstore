@@ -16,3 +16,8 @@ Bookstore::~Bookstore() {
     bookList->~ArrayList();
     bookList = nullptr;
 }
+
+void Bookstore::addBook(std::string newTitle) {
+    Book* newBook = new Book(newTitle);
+    bookList->insertAtFront(newBook);
+}

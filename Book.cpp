@@ -30,6 +30,15 @@ Book::Book(Book& bookToCopy) {
     title = bookToCopy.title;
 }
 
+bool Book::operator==(const Book other) {
+    if(this->title == other.title) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
 Book::~Book() {
     waitingList.~LinkedQueue();
 }

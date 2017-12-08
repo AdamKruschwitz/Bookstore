@@ -14,10 +14,11 @@ private:
     int capacity;
     int ListSize;
     T* array;
+    void doubleCapacity();
 
 public:
-    ArrayList();
-    ArrayList(const ArrayList arrayListToCopy);
+    ArrayList<T>();
+    ArrayList(const ArrayList& arrayListToCopy);
     ~ArrayList();
 
     void insertAtFront(T item);
