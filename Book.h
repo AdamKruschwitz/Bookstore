@@ -23,6 +23,8 @@ public:
     Book(std::string title);
     Book(Book& bookToCopy);
     bool operator==(const Book other);
+    bool operator<(const Book other);
+    bool operator>(const Book other);
     ~Book();
     int getHave();
     int getWant();

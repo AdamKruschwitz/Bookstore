@@ -39,6 +39,24 @@ bool Book::operator==(const Book other) {
     }
 }
 
+bool Book::operator<(const Book other) {
+    if(this->title < other.title) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+bool Book::operator>(const Book other) {
+    if(this->title > other.title) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
 Book::~Book() {
     waitingList.~LinkedQueue();
 }
