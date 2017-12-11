@@ -169,7 +169,7 @@ void UserInterface::run(){
         if(input=="i"){
             std::cout << "Please type in a title to inquire about" << endl;
             getline(cin,input);
-            inquire(input);
+            //inquire(input);
             //run inquire function
         }
         if(input=="l"){
