@@ -21,8 +21,8 @@ public:
     ~BookList();
     Book* insertBook(std::string bookTitle);
     Book* getBook(std::string bookTitle);
-    void loadList();
-    void saveList();
+    //void loadList();
+    //void saveList();
 };
 
 

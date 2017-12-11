@@ -18,7 +18,7 @@ UserInterface::UserInterface(){
 void UserInterface::help(){
     //lists commands
     std::cout << "Keyboard shortcut \t command \t description" << std::endl;
-    std::cout <<"i \t inquire \t Displays information for a specified title" << std::endl;
+    std::cout <<"i \t std::string nameIn = \"\",std::string numberIn = \"\",std::string emailIn = \"\",std::string preferenceIn = \"\" \t Displays information for a specified title" << std::endl;
     std::cout <<"l \t list \t List the information for the entire inventory (in alphabetical order)" << std::endl;
     std::cout <<"a \t add \t Adds a book to the inventory" << std::endl;
     std::cout <<"m \t modify \t Modify the values of a specified title" << std::endl;
@@ -71,7 +71,7 @@ void UserInterface::add(Book& title){
     std::string haveIn = "";
     getline(cin,haveIn);
 
-    Book currentBook();
+    //Book currentBook = Book();
 
     currentBookstore.addBook(titleIn);
 
