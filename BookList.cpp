@@ -49,13 +49,25 @@ Book* BookList::insertBook(std::string bookTitle) {
     return bookToAdd;
 }
 
-/*
-Book* findBook(Book* bookToCompare, Book** array) {
 
+Book* findBook(Book* bookToCompare, Book** array, int size) {
+    int mid = size/2;
+    if(size <= 0) {
+        return nullptr;
+    }
+    else if ((&array[mid]) == &bookToCompare) {
+        return array[mid];
+    }
+    else if (&array[mid] < &bookToCompare) {
+        return findBook(bookToCompare, array+mid, size-mid);
+    }
+    else {
+        return findBook(bookToCompare, array, size-mid);
+    }
 }
 
 Book* BookList::getBook(std::string bookTitle) {
     Book* bookToCompare = new Book(bookTitle);
-    return findBook(bookToCompare, books);
+    return findBook(bookToCompare, books, bookNumber);
 }
- */
+
