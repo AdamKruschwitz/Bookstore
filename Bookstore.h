@@ -5,14 +5,15 @@
 #ifndef BOOKSTORE_2_ELECTRIC_BOOGALOO_BOOKSTORE_H
 #define BOOKSTORE_2_ELECTRIC_BOOGALOO_BOOKSTORE_H
 
-#include "ArrayList.h"
+//#include "ArrayList.h"
 #include "Book.h"
 #include "Person.h"
 #include <string>
+#include "BookList.h"
 
 class Bookstore {
 private:
-    ArrayList* bookList = nullptr;
+    BookList* bookList = nullptr;
 
 public:
     /**

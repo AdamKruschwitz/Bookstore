@@ -6,10 +6,16 @@
 #include <iostream>
 #include "Book.h"
 #include "Book.cpp"
-#include "ArrayList.h"
+//#include "ArrayList.h"
+#include "BookList.h"
 using namespace std;
 
-void help(){
+UserInterface::UserInterface(){
+     currentBookstore =  Bookstore();
+
+}
+
+void UserInterface::help(){
     //lists commands
     std::cout << "Keyboard shortcut \t command \t description" << std::endl;
     std::cout <<"i \t inquire \t Displays information for a specified title" << std::endl;
@@ -24,40 +30,63 @@ void help(){
 
 }
 
-void inquire(std::string title){
-    //find matching book
-    //print out info
-    Book current = ArrayList.find(title); //doesnt work yet
+//void UserInterface::inquire(std::string title){
+//    //find matching book
+//    //print out info
+//    Book current = BookListgetBook(title); //doesnt work yet
+//
+//    std::cout << current.getTitle() << std::endl;
+//    std::cout << "Have Value = " << current.getHave()<< std::endl;
+//    std::cout << "Want Value = " << current.getWant() << std::endl;
+//    std::cout << "Current Price = $" << current.getPrice() << std::endl;
+//    //print out wait list next
+//    //Display info for a title
+//}
 
-    std::cout << current.getTitle() << std::endl;
-    std::cout << "Have Value = " << current.getHave()<< std::endl;
-    std::cout << "Want Value = " << current.getWant() << std::endl;
-    std::cout << "Current Price = $" << current.getPrice() << std::endl;
-    //print out wait list next
-    //Display info for a title
-}
-
-void list(){
+void UserInterface::list(){
     //list the info for the inventory
 }
 
-void add(Book& title){
+void UserInterface::add(Book& title){
     //Add a book to the inventory.
     // Prompt for initial want value
     // and have value.
     // If the title already exists,
     // inform the user and print the
     // information for that title.
+    std::cout << "Please enter the title of the book you wish to add" << std::endl;
+
+    std::string titleIn ="";
+    getline(cin,titleIn);
+
+    //check if book exists
+
+    std::cout << "Please enter the want value" << std::endl;
+
+    std::string wantIn = "";
+    getline(cin,wantIn);
+
+    std::cout << "Please enter the have value" << std::endl;
+
+    std::string haveIn = "";
+    getline(cin,haveIn);
+
+    Book currentBook();
+
+    currentBookstore.addBook(titleIn);
+
+
+
 }
 
-void modify(Book& title){
+void UserInterface::modify(Book& title){
     //Modify the want value for the specified title.
     // Display current want and have values,
     // and prompt user for new want value.
 
 }
 
-void sell(Book& title){
+void UserInterface::sell(Book& title){
     //Decrease the count for the specified title by 1.
     // If the title doesn't exist yet, it should be added.
     // If the title is sold out (or didn't exist),
@@ -66,7 +95,7 @@ void sell(Book& title){
 
 }
 
-void order(){
+void UserInterface::order(){
     //Needs file io
    //Create a bulk purchase order for
     // additional books based on a comparison
@@ -77,7 +106,7 @@ void order(){
 
 }
 
-void delivery(){
+void UserInterface::delivery(){
     //needs file io
 
     //Take information from a file listing the delivery
@@ -101,7 +130,7 @@ void delivery(){
 
 }
 
-void returnFunction(){
+void UserInterface::returnFunction(){
     //needs file io still
 
     //Write a return invoice to a file specifying all
@@ -114,10 +143,11 @@ void returnFunction(){
 
 }
 
-void quit(){
+void UserInterface::quit(){
     //Save the inventory and wait lists in a file and terminate execution.
 }
-void run(){
+void UserInterface::run(){
+
 
     std::string input ="";
     while (input != "q"){
@@ -126,7 +156,12 @@ void run(){
         getline(cin,input);
 
         //not sure if this works or not
-        input = tolower(input);
+
+        std::locale loc;
+        std::string str=input;
+        for (std::string::size_type i=0; i<str.length(); ++i)
+            std::cout << std::tolower(str[i],loc);
+        //input = std::tolower(input);
 
         if (input=="h"){
             help();

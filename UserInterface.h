@@ -12,7 +12,14 @@
 
 class UserInterface {
 
+private:
+    Bookstore currentBookstore;
+
 public:
+
+    UserInterface();
+
+
     void help();
 
     void inquire(std::string title);
