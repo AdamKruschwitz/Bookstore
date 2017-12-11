@@ -6,18 +6,18 @@
 
 Bookstore::Bookstore() {
     if(bookList==nullptr) {
-        bookList = new ArrayList<Book>();
+        bookList = new BookList();
     }
     loadLibrary();
 }
 
 Bookstore::~Bookstore() {
     saveLibrary();
-    bookList->~ArrayList();
+    bookList->~BookList();
     bookList = nullptr;
 }
 
 void Bookstore::addBook(std::string newTitle) {
-    Book* newBook = new Book(newTitle);
-    bookList->insertAtFront(newBook);
+    //Book* newBook = new Book(newTitle);
+    bookList->insertBook(newTitle);
 }

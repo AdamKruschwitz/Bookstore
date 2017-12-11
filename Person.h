@@ -14,7 +14,7 @@ private:
     std::string preference;
 
 public:
-    Person(std::string nameIn,std::string numberIn,std::string emailIn,std::string preferenceIn);
+    Person(std::string nameIn = "",std::string numberIn = "",std::string emailIn = "",std::string preferenceIn = "");
     std::string getName();
     /**
     * gets the name of the Person
