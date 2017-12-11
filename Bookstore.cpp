@@ -22,10 +22,10 @@ Book* Bookstore::addBook(std::string newTitle) {
     return bookList->insertBook(newTitle);
 }
 
-void saveLibrary(){
+void Bookstore::saveLibrary(){
 
 }
 
-void loadLibrary(){
+void Bookstore::loadLibrary(){
     
 }

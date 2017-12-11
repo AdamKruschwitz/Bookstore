@@ -5,7 +5,6 @@
 #include "UserInterface.h"
 #include <iostream>
 #include "Book.h"
-#include "Book.cpp"
 //#include "ArrayList.h"
 #include "BookList.h"
 using namespace std;
@@ -74,7 +73,7 @@ void UserInterface::add(Book& title){
     //Book currentBook = Book();
 
     Book* shit = currentBookstore.addBook(titleIn);
-    shit.
+    //shit.
 
 
 
