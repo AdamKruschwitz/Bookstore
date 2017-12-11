@@ -14,8 +14,7 @@ private:
     std::string preference;
 
 public:
-    Person();
-    Person(std::string name,std::string number,std::string email,std::string preference);
+    Person(std::string nameIn,std::string numberIn,std::string emailIn,std::string preferenceIn);
     std::string getName();
     /**
     * gets the name of the Person
@@ -62,6 +61,10 @@ public:
      * @post preference is updated and set
      */
     std::string getPreferredContactInfo();
+    /**
+     * grabs the preferred contact method along with the number or email
+     * @returns preferred contact method and the number or email
+     */
 
 };
 
