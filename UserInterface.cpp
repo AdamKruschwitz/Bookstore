@@ -73,7 +73,8 @@ void UserInterface::add(Book& title){
 
     //Book currentBook = Book();
 
-    currentBookstore.addBook(titleIn);
+    Book* shit = currentBookstore.addBook(titleIn);
+    shit.
 
 
 
@@ -169,7 +170,7 @@ void UserInterface::run(){
         if(input=="i"){
             std::cout << "Please type in a title to inquire about" << endl;
             getline(cin,input);
-            inquire(input);
+            //inquire(input);
             //run inquire function
         }
         if(input=="l"){

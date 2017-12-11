@@ -17,7 +17,15 @@ Bookstore::~Bookstore() {
     bookList = nullptr;
 }
 
-void Bookstore::addBook(std::string newTitle) {
+Book* Bookstore::addBook(std::string newTitle) {
     //Book* newBook = new Book(newTitle);
-    bookList->insertBook(newTitle);
+    return bookList->insertBook(newTitle);
+}
+
+void saveLibrary(){
+
+}
+
+void loadLibrary(){
+    
 }
