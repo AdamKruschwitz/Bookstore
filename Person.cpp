@@ -3,7 +3,7 @@
 //
 #include <iostream>
 #include "Person.h"
-Person::Person(std::string nameIn = "",std::string numberIn = "",std::string emailIn = "",std::string preferenceIn = "") {
+Person::Person(std::string nameIn, std::string numberIn ,std::string emailIn ,std::string preferenceIn) {
     this->name = nameIn;
     this->number = numberIn;
     this->email = emailIn;
