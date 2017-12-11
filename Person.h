@@ -6,7 +6,8 @@
 #define RANDOMBOOKNAMEGENERATOR_PERSON_H
 #include <string>
 
-class Person {
+class
+Person {
 private:
     std::string name;
     std::string number;
@@ -41,7 +42,7 @@ public:
      * sets the name of the person
      * @param name is the string that holds the persons name
      * @post name is updated and set
-     */
+    */
     void setNumber(std::string numberIn);
     /**
      * sets the number of the person
