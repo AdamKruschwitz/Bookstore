@@ -8,11 +8,10 @@ BookList::BookList() {
     booksCapacity = 5;
     bookNumber = 0;
     books = new Book*[booksCapacity];
-    loadList();
 }
 
+
 BookList::~BookList() {
-    saveList();
     delete[] books;
     books = nullptr;
 }
@@ -71,3 +70,6 @@ Book* BookList::getBook(std::string bookTitle) {
     return findBook(bookToCompare, books, bookNumber);
 }
 
+void BookList::saveList() {}
+
+void BookList::loadList() {}
