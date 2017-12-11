@@ -8,11 +8,10 @@ BookList::BookList() {
     booksCapacity = 5;
     bookNumber = 0;
     books = new Book*[booksCapacity];
-    loadList();
 }
 
+
 BookList::~BookList() {
-    saveList();
     delete[] books;
     books = nullptr;
 }

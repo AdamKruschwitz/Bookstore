@@ -31,7 +31,7 @@ public:
      * @param newTitle title of the book to be added
      * @post a new book object is created of the given title,
      */
-    void addBook(std::string newTitle);
+    Book* addBook(std::string newTitle);
     void saveLibrary();
     void loadLibrary();
 };

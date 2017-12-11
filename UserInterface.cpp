@@ -73,7 +73,8 @@ void UserInterface::add(Book& title){
 
     //Book currentBook = Book();
 
-    currentBookstore.addBook(titleIn);
+    Book* shit = currentBookstore.addBook(titleIn);
+    shit.
 
 
 
