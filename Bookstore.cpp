@@ -29,3 +29,7 @@ int Bookstore::getLibrarySize() {
 Book* Bookstore::getBookAt(int index) {
     return bookList.getValueAt(index);
 }
+
+Book* Bookstore::findBook(std::string title) {
+    return bookList->getBook(title);
+}

@@ -99,7 +99,17 @@ void UserInterface::modify(std::string title){
     //Modify the want value for the specified title.
     // Display current want and have values,
     // and prompt user for new want value.
+    Book* currentBook = currentBookstore.findBook(title);
+    std::cout << currentBook->getTitle() << std::endl;
+    std::cout << "Want: " + std::to_string(currentBook->getWant()) << std::endl;
+    std::cout << "Have: " + std::to_string(currentBook->getHave()) << std::endl;
+    std::cout << "Enter new want value " << std::endl;
+    std::string wantIn = "";
+    getline(cin, wantIn);
 
+    int intWantIn = stoi(wantIn);
+    currentBook->setWant(intWantIn);
+    std::cout << "Want value changed to " + std::to_string(intWantIn) << std::endl;
 }
 
 void UserInterface::sell(std::string title){
