@@ -32,7 +32,7 @@ public:
      * @post a new book object is created of the given title,
      */
     Book* addBook(std::string newTitle);
-    void saveLibrary();
-    void loadLibrary();
+    int getLibrarySize();
+    Book* getBookAt(int index);
 };
 #endif //BOOKSTORE_2_ELECTRIC_BOOGALOO_BOOKSTORE_H

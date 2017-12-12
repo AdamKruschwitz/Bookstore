@@ -42,11 +42,27 @@ void UserInterface::help(){
 //    //Display info for a title
 //}
 
-void UserInterface::list(){
-    //list the info for the inventory
+std::string getBookInfo(Book* book) {
+    std::string out = "";
+    Queue<Person> waitingList = book->getWaitingList();
+    out += book->getTitle() + ", ";
+    out += "price: $" + std::to_string(book->getPrice());
+    out += "have: " + std::to_string(book->getHave());
+    out += "want: " + std::to_string(book->getWant());
+    out += "waitlist: ";
+    while(!waitingList.isEmpty()) {
+        out+=waitingList.dequeue().getName();
+    }
 }
 
-void UserInterface::add(Book& title){
+void UserInterface::list(){
+    //list the info for the inventory
+    for(int i = 0; i < currentBookstore.getLibrarySize(); i++) {
+        std::cout << getBookInfo(currentBookstore.getBookAt(i));
+    }
+}
+
+void UserInterface::add(std::string title){
     //Add a book to the inventory.
     // Prompt for initial want value
     // and have value.
@@ -79,14 +95,14 @@ void UserInterface::add(Book& title){
 
 }
 
-void UserInterface::modify(Book& title){
+void UserInterface::modify(std::string title){
     //Modify the want value for the specified title.
     // Display current want and have values,
     // and prompt user for new want value.
 
 }
 
-void UserInterface::sell(Book& title){
+void UserInterface::sell(std::string title){
     //Decrease the count for the specified title by 1.
     // If the title doesn't exist yet, it should be added.
     // If the title is sold out (or didn't exist),
@@ -166,35 +182,38 @@ void UserInterface::run(){
         if (input=="h"){
             help();
         }
-        if(input=="i"){
+        else if(input=="i"){
             std::cout << "Please type in a title to inquire about" << endl;
             getline(cin,input);
             //inquire(input);
             //run inquire function
         }
-        if(input=="l"){
+        else if(input=="l"){
             list();
         }
-        if(input=="a"){
+        else if(input=="a"){
             //run add function
         }
-        if(input=="m"){
+        else if(input=="m"){
             //run modify function
         }
-        if(input=="s"){
+        else if(input=="s"){
             //run sell function
         }
-        if(input=="o"){
+        else if(input=="o"){
             //run order function
         }
         if(input=="d"){
             //run delivery function
         }
-        if(input=="r"){
+        else if(input=="r"){
             //run returnFunction
         }
-        if(input=="q"){
+        else if(input=="q"){
             quit();
+        }
+        else {
+            std::cout << "please enter a valid command. enter h for help" << std::endl;
         }
 
     }
