@@ -114,3 +114,8 @@ void Book::removeFromWaitingList() {
     out += removedPerson.getPreferredContactInfo();
     std::cout << out << std::endl;
 }
+
+Queue<Person> Book::getWaitingList() {
+    Queue<Person> out = LinkedQueue<Person>(waitingList);
+    return out;
+}

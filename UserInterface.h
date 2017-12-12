@@ -26,11 +26,11 @@ public:
 
     void list();
 
-    void add(Book& title);
+    void add(std::string title);
 
-    void modify(Book& title);
+    void modify(std::string title);
 
-    void sell(Book& title);
+    void sell(std::string title);
 
     void order();
 
