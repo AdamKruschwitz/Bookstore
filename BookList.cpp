@@ -3,7 +3,9 @@
 //
 
 #include "BookList.h"
-
+#include <iostream>
+#include <fstream>
+#include <sstream>
 BookList::BookList() {
     booksCapacity = 5;
     bookNumber = 0;
@@ -24,6 +26,13 @@ void BookList::doubleCapactiy() {
     }
     delete[] books;
     books = newBooks;
+}
+int BookList::getSize(){
+    return bookNumber;
+}
+
+Book* BookList::getValueAt(int location){
+    return books[location];
 }
 
 Book* BookList::insertBook(std::string bookTitle) {
@@ -70,6 +79,27 @@ Book* BookList::getBook(std::string bookTitle) {
     return findBook(bookToCompare, books, bookNumber);
 }
 
-void BookList::saveList() {}
+void BookList::saveList() {
+    std::ofstream fout ("inventory.txt");
+    std::string output="";
+    std::string title = "";
+    std::string want = "";
+    std::string have = "";
+    std::string price = "";
+    for (int i = 0; i < bookNumber; ++i) {
+        Book* current = (books[i]);
+        title = current->getTitle();
+        want = current->getWant();
+        have = current->getHave();
+        price = current->getPrice();
+        output += title + "," + want + "," + have + "," + price + "\n";
+    }
+    fout << output << std::endl;
 
-void BookList::loadList() {}
+}
+
+void BookList::loadList() {
+
+
+
+}

@@ -19,6 +19,8 @@ private:
 public:
     BookList();
     ~BookList();
+    int getSize();
+    Book* getValueAt(int location);
     Book* insertBook(std::string bookTitle);
     Book* getBook(std::string bookTitle);
     void loadList();
