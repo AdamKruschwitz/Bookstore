@@ -30,18 +30,22 @@ void UserInterface::help(){
 
 }
 
-//void UserInterface::inquire(std::string title){
-//    //find matching book
-//    //print out info
-//    Book current = BookListgetBook(title); //doesnt work yet
-//
-//    std::cout << current.getTitle() << std::endl;
-//    std::cout << "Have Value = " << current.getHave()<< std::endl;
-//    std::cout << "Want Value = " << current.getWant() << std::endl;
-//    std::cout << "Current Price = $" << current.getPrice() << std::endl;
-//    //print out wait list next
-//    //Display info for a title
-//}
+void UserInterface::inquire(std::string title){
+    //find matching book
+    //print out info
+    Book* current = currentBookstore.findBook(title); //doesnt work yet
+
+    std::cout << current->getTitle() << std::endl;
+    std::cout << "Have Value = " << current->getHave()<< std::endl;
+    std::cout << "Want Value = " << current->getWant() << std::endl;
+    std::cout << "Current Price = $" << current->getPrice() << std::endl;
+    std::cout << "Waiting List: ";
+    Queue waitingList = current->getWaitingList();
+    while(!waitingList.isEmpty()) {
+        std::cout << waitingList.dequeue().getName() + ", ";
+    }
+    std::cout << std::endl;
+}
 
 std::string getBookInfo(Book* book) {
     std::string out = "";
@@ -177,7 +181,7 @@ void UserInterface::sell(std::string title){
 
 void UserInterface::order(){
     //Needs file io
-   //Create a bulk purchase order for
+    //Create a bulk purchase order for
     // additional books based on a comparison
     // of the have and want values in the inventory.
     // For each book, enough books should be ordered
