@@ -7,6 +7,7 @@
 #include "Book.h"
 //#include "ArrayList.h"
 #include "BookList.h"
+#include <fstream>
 using namespace std;
 
 UserInterface::UserInterface(){
@@ -166,6 +167,23 @@ void UserInterface::returnFunction(){
     // the have value to equal the want value, and the
     // output file should then give the list of books
     // to take off the shelf and return.
+
+    int librarySize = currentBookstore.getLibrarySize();
+    for(int i = 0; i < librarySize; i++) {
+        Book* currentBook = currentBookstore.getBookAt(i);
+        int currentBookHave = currentBook->getHave();
+        int currentBookWant = currentBook->getWant();
+        int difference = currentBookHave - currentBookWant;
+        if(difference > 0) {
+            std::ofstream fout ("returnInvoice.txt");
+
+            std::string output = "";
+            output += currentBook->getTitle();
+            output += ", return " + std::to_string(difference) + " copies.\n";
+            fout << output;
+        }
+    }
+    std::cout << "return invoice created in returnInvoice.txt" << std::endl;
 
 }
 
