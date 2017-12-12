@@ -187,7 +187,20 @@ void UserInterface::order(){
     // For each book, enough books should be ordered
     // so that, when the order is received, the have value
     // will be equal to the want value.
+    fstream fout ("order.txt");
+    int librarySize = currentBookstore.getLibrarySize();
+    for (int i = 0; i<librarySize; i++) {
+        Book* currentBook = currentBookstore.getBookAt(i);
+        int currentBookWant = currentBook->getWant();
+        int currentBookHave = currentBook->getHave();
+        int difference = currentBookHave - currentBookWant;
 
+        if(difference < 0) {
+            difference *= 1;
+            fout << currentBook->getTitle() + ", order " + std::to_string(difference) + " copies\n";
+        }
+    }
+    std::cout << "order list written in order.txt" << std::endl;
 }
 
 void UserInterface::delivery(){
