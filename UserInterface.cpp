@@ -7,6 +7,7 @@
 #include "Book.h"
 //#include "ArrayList.h"
 #include "BookList.h"
+#include <fstream>
 using namespace std;
 
 UserInterface::UserInterface(){
@@ -99,7 +100,26 @@ void UserInterface::modify(std::string title){
     //Modify the want value for the specified title.
     // Display current want and have values,
     // and prompt user for new want value.
+    Book* currentBook = currentBookstore.findBook(title);
+    std::cout << currentBook->getTitle() << std::endl;
+    std::cout << "Want: " + std::to_string(currentBook->getWant()) << std::endl;
+    std::cout << "Have: " + std::to_string(currentBook->getHave()) << std::endl;
+    std::cout << "Price: " + std::to_string(currentBook->getPrice()) << std::endl;
+    std::cout << "Enter new want value " << std::endl;
+    std::string wantIn = "";
+    getline(cin, wantIn);
 
+    int intWantIn = stoi(wantIn);
+    currentBook->setWant(intWantIn);
+    std::cout << "Want value changed to " + std::to_string(intWantIn) << std::endl;
+
+    std::cout << "Enter new price" << std::endl;
+    std::string priceIn = "";
+    getline(cin, priceIn);
+
+    double doublePriceIn = atof(priceIn);
+    currentBook->setPrice(doublePriceIn);
+    std::cout << "Price changed to " + std::to_string(doublePriceIn) << std::endl;
 }
 
 void UserInterface::sell(std::string title){
@@ -109,6 +129,50 @@ void UserInterface::sell(std::string title){
     // prompt the user for the buyer's information and
     // enter them on the wait list for that title.
 
+    Book* currentBook = currentBookstore.findBook(title);
+    if(currentBook == nullptr) {
+        std::cout << "Book not in library, added to library" << std::endl;
+        currentBook = currentBookstore.addBook(title);
+        currentBook->setWant(1);
+        currentBook->setHave(0);
+        currentBook->setPrice(19.99);
+    }
+    if(currentBook->getHave() < 1) {
+        std::cout << "The book is out of stock, add user to waiting list" << std::endl;
+        Person* toAdd = new Person();
+        std::string name = "";
+        std::string email = "";
+        std::string number = "";
+        std::string contact = "";
+
+        std::cout << "enter customer's name" << std::endl;
+        getline(cin, name);
+        std::cout << "enter customer's email" << std::endl;
+        getline(cin, email);
+        std::cout << "enter customer's number" << std::endl;
+        getline(cin, number);
+        while(contact == "") {
+            std::cout << "enter customer's preffered contact method (text, call, email)" << std::endl;
+            getline(cin, contact);
+            if(contact != "text" || contact != "call" || contact != "email") {
+                contact = "";
+                std::cout << "please enter 'text', 'call', or 'email'" << std::endl;
+            }
+        }
+
+        toAdd->setName(name);
+        toAdd->setEmail(email);
+        toAdd->setNumber(number);
+        toAdd->setPreference(contact);
+
+        currentBook->addToWaitingList(*toAdd);
+        std::cout << "user added to waiting list" << std::endl;
+
+    }
+    else {
+        int currentHave = currentBook->getHave();
+        currentBook->setHave(currentHave-1);
+    }
 }
 
 void UserInterface::order(){
@@ -156,6 +220,23 @@ void UserInterface::returnFunction(){
     // the have value to equal the want value, and the
     // output file should then give the list of books
     // to take off the shelf and return.
+
+    int librarySize = currentBookstore.getLibrarySize();
+    for(int i = 0; i < librarySize; i++) {
+        Book* currentBook = currentBookstore.getBookAt(i);
+        int currentBookHave = currentBook->getHave();
+        int currentBookWant = currentBook->getWant();
+        int difference = currentBookHave - currentBookWant;
+        if(difference > 0) {
+            std::ofstream fout ("returnInvoice.txt");
+
+            std::string output = "";
+            output += currentBook->getTitle();
+            output += ", return " + std::to_string(difference) + " copies.\n";
+            fout << output;
+        }
+    }
+    std::cout << "return invoice created in returnInvoice.txt" << std::endl;
 
 }
 
