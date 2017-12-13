@@ -35,5 +35,6 @@ public:
     int getLibrarySize();
     Book* getBookAt(int index);
     Book* findBook(std::string title);
+
 };
 #endif //BOOKSTORE_2_ELECTRIC_BOOGALOO_BOOKSTORE_H

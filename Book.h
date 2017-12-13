@@ -37,7 +37,7 @@ public:
     void addToWaitingList(Person newPerson);
     void removeFromWaitingList();
     int calculateRestock();
-    Queue<Person> getWaitingList();
+    LinkedQueue<Person> getWaitingList();
     void restock(int numNewCopies);
 };
 

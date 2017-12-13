@@ -40,7 +40,7 @@ void UserInterface::inquire(std::string title){
     std::cout << "Want Value = " << current->getWant() << std::endl;
     std::cout << "Current Price = $" << current->getPrice() << std::endl;
     std::cout << "Waiting List: ";
-    Queue waitingList = current->getWaitingList();
+    LinkedQueue<Person> waitingList = current->getWaitingList();
     while(!waitingList.isEmpty()) {
         std::cout << waitingList.dequeue().getName() + ", ";
     }
@@ -49,7 +49,7 @@ void UserInterface::inquire(std::string title){
 
 std::string getBookInfo(Book* book) {
     std::string out = "";
-    Queue<Person> waitingList = book->getWaitingList();
+    LinkedQueue<Person> waitingList = book->getWaitingList();
     out += book->getTitle() + ", ";
     out += "price: $" + std::to_string(book->getPrice());
     out += "have: " + std::to_string(book->getHave());
@@ -58,6 +58,7 @@ std::string getBookInfo(Book* book) {
     while(!waitingList.isEmpty()) {
         out+=waitingList.dequeue().getName();
     }
+    return out;
 }
 
 void UserInterface::list(){
@@ -135,7 +136,7 @@ void UserInterface::modify(std::string title){
     std::string priceIn = "";
     getline(cin, priceIn);
 
-    double doublePriceIn = atof(priceIn);
+    double doublePriceIn = stoi(priceIn);
     currentBook->setPrice(doublePriceIn);
     std::cout << "Price changed to " + std::to_string(doublePriceIn) << std::endl;
 }

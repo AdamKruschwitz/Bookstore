@@ -115,7 +115,7 @@ void Book::removeFromWaitingList() {
     std::cout << out << std::endl;
 }
 
-Queue<Person> Book::getWaitingList() {
-    Queue<Person> out = LinkedQueue<Person>(waitingList);
+LinkedQueue<Person> Book::getWaitingList() {
+    LinkedQueue<Person> out = LinkedQueue<Person>(waitingList);
     return out;
 }
