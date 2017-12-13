@@ -11,6 +11,7 @@ BookList::BookList() {
     booksCapacity = 5;
     bookNumber = 0;
     books = new Book*[booksCapacity];
+    std::cout << books << std::endl;
 }
 
 
@@ -55,6 +56,7 @@ Book* BookList::insertBook(std::string bookTitle) {
         books[i] = books[i-1];
     }
     books[indexToInsert] = bookToAdd;
+    bookNumber++;
     return bookToAdd;
 }
 

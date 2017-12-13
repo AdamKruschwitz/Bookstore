@@ -5,9 +5,7 @@
 #include "Bookstore.h"
 
 Bookstore::Bookstore() {
-    if(bookList==nullptr) {
-        bookList = new BookList();
-    }
+    bookList = new BookList();
     //loadLibrary();
 }
 
