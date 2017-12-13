@@ -6,6 +6,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <istream>
 BookList::BookList() {
     booksCapacity = 5;
     bookNumber = 0;
@@ -86,20 +87,57 @@ void BookList::saveList() {
     std::string want = "";
     std::string have = "";
     std::string price = "";
-    for (int i = 0; i < bookNumber; ++i) {
-        Book* current = (books[i]);
-        title = current->getTitle();
-        want = current->getWant();
-        have = current->getHave();
-        price = current->getPrice();
-        output += title + "," + want + "," + have + "," + price + "\n";
+    if (fout) {
+        for (int i = 0; i < bookNumber; ++i) {
+            Book *current = (books[i]);
+            title = current->getTitle();
+            want = current->getWant();
+            have = current->getHave();
+            price = current->getPrice();
+            output += title + "," + want + "," + have + "," + price + "\n";
+        }
+        fout << output;
+    } else{
+        std::cout << "error in opening inventory.txt" << std::endl;
     }
-    fout << output << std::endl;
+}
+
+void createBookFromString(BookList& thisBookList, std::string data){
+
+    //gets a string from file
+    std::stringstream parts(data);
+    std::string part;
+
+    //parses the first part for the title and creates a book with it
+    getline(parts, part, ',');
+    Book* bookToAdd = thisBookList.insertBook(part);
+
+    //parses again to get want value
+    getline(parts, part, ',');
+    int want = stoi(part);
+    bookToAdd->setWant(want);
+
+    //parses again to get have value
+    getline(parts, part, ',');
+    int have = stoi(part);
+    bookToAdd->setHave(have);
+
+    //parses again to get the price
+    getline(parts, part, ',');
+    int price = stoi(part);
+    bookToAdd->setPrice(price);
 
 }
 
 void BookList::loadList() {
 
+    std::ifstream fin ("inventory.txt");
 
-
+    if (fin){
+        while(fin) {
+            std::string str = "";
+            getline(fin, str);
+            createBookFromString(*this, str);
+        }
+    }
 }

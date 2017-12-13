@@ -22,7 +22,7 @@ public:
 
     void help();
 
-    //void inquire(std::string title);
+    void inquire(std::string title);
 
     void list();
 
