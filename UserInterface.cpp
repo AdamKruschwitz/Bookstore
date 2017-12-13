@@ -33,7 +33,7 @@ void UserInterface::help(){
 void UserInterface::inquire(std::string title){
     //find matching book
     //print out info
-    Book* current = currentBookstore.findBook(title); //doesnt work yet
+    Book* current = currentBookstore.findBook(title); //doesnt work yet, might work now though
 
     std::cout << current->getTitle() << std::endl;
     std::cout << "Have Value = " << current->getHave()<< std::endl;
@@ -74,27 +74,41 @@ void UserInterface::add(std::string title){
     // If the title already exists,
     // inform the user and print the
     // information for that title.
-    std::cout << "Please enter the title of the book you wish to add" << std::endl;
 
-    std::string titleIn ="";
-    getline(cin,titleIn);
 
     //check if book exists
 
-    std::cout << "Please enter the want value" << std::endl;
+    if(currentBookstore.findBook(title)){
+        std::cout << "This book already exists" << std::endl;
+        inquire(title);
 
-    std::string wantIn = "";
-    getline(cin,wantIn);
+    }else { //take in new info and create book
 
-    std::cout << "Please enter the have value" << std::endl;
+        std::cout << "Please enter the want value" << std::endl;
 
-    std::string haveIn = "";
-    getline(cin,haveIn);
+        std::string wantIn = "";
+        getline(cin, wantIn);
+        int wantInt = stoi(wantIn);
 
-    //Book currentBook = Book();
+        std::cout << "Please enter the have value" << std::endl;
 
-    Book* shit = currentBookstore.addBook(titleIn);
-    //shit.
+        std::string haveIn = "";
+        getline(cin, haveIn);
+        int haveInt = stoi(haveIn);
+
+        std::cout << "Please enter the price" << std::endl;
+
+        std::string priceIn = "";
+        getline(cin, priceIn);
+        int priceInt = stoi(priceIn);
+
+
+        Book *bookToAdd = currentBookstore.addBook(title);
+        bookToAdd->setWant(wantInt);
+        bookToAdd->setHave(haveInt);
+        bookToAdd->setPrice(priceInt);
+
+    }
 
 
 
@@ -282,29 +296,51 @@ void UserInterface::run(){
         else if(input=="i"){
             std::cout << "Please type in a title to inquire about" << endl;
             getline(cin,input);
-            //inquire(input);
+            inquire(input);
             //run inquire function
         }
         else if(input=="l"){
             list();
         }
         else if(input=="a"){
-            //run add function
+            std::cout << "Please enter the title of the book you wish to add" << std::endl;
+
+            std::string titleIn ="";
+            getline(cin,titleIn);
+
+            add(titleIn);
+
+
         }
         else if(input=="m"){
             //run modify function
+            std::cout << "Please enter the title of the book you wish to modify" << std::endl;
+
+            std::string titleIn ="";
+            getline(cin,titleIn);
+            modify(titleIn);
+
         }
         else if(input=="s"){
             //run sell function
+
+            std::cout << "Please enter the title of the book you wish to sell" << std::endl;
+
+            std::string titleIn ="";
+            getline(cin,titleIn);
+            sell(titleIn);
         }
         else if(input=="o"){
             //run order function
+            order();
         }
-        if(input=="d"){
+        else if(input=="d"){
             //run delivery function
+            delivery();
         }
         else if(input=="r"){
             //run returnFunction
+            returnFunction();
         }
         else if(input=="q"){
             quit();
