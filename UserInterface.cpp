@@ -34,7 +34,7 @@ void UserInterface::help(){
 void UserInterface::inquire(std::string title){
     //find matching book
     //print out info
-    Book* current = currentBookstore.findBook(title); //doesnt work yet, might work now though
+    Book* current = currentBookstore.findBook(title);
     if(current==nullptr) {
         std::cout << "this book does not yet exist in the library" << std::endl;
     }
@@ -158,10 +158,15 @@ void UserInterface::sell(std::string title){
     Book* currentBook = currentBookstore.findBook(title);
     if(currentBook == nullptr) {
         std::cout << "Book not in library, added to library" << std::endl;
-        currentBook = currentBookstore.addBook(title);
-        currentBook->setWant(1);
-        currentBook->setHave(0);
-        currentBook->setPrice(19.99);
+//        //currentBook = currentBookstore.addBook(title);
+//        if(currentBook== nullptr){
+//            std::cout << "shits broken" << std::endl;
+//        }
+//        currentBook->setWant(1);
+//        currentBook->setHave(0);
+//        currentBook->setPrice(19.99);
+        add(title);
+        currentBook = currentBookstore.findBook(title);
     }
     if(currentBook->getHave() < 1) {
         std::cout << "The book is out of stock, add user to waiting list" << std::endl;
@@ -282,6 +287,7 @@ void UserInterface::delivery(std::string fileIn){
                 getline(parts, part, ',');
                 numberOfBooks = stoi(part);
                 int numberOfBooksWanted = currentBook->getWant();
+                //change this to while ppeople exist in waiting list and while we still have books that we can deliver
 
                 while(numberOfBooksWanted!=0){
 

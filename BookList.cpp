@@ -80,7 +80,7 @@ Book* BookList::getBook(std::string bookTitle) {
     Book* bookToCompare = new Book(bookTitle);
     for(int i=0; i < bookNumber; i++) {
         if(*bookToCompare == *books[i]) {
-            delete bookToCompare;
+            //delete bookToCompare;
             return books[i];
         }
     }
