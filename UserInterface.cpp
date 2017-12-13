@@ -8,6 +8,8 @@
 //#include "ArrayList.h"
 #include "BookList.h"
 #include <fstream>
+#include <sstream>
+#include <istream>
 using namespace std;
 
 UserInterface::UserInterface(){
@@ -78,7 +80,7 @@ void UserInterface::add(std::string title){
 
     //check if book exists
 
-    if(currentBookstore.findBook(title)){
+    if(currentBookstore.findBook(title)!= nullptr){
         std::cout << "This book already exists" << std::endl;
         inquire(title);
 
@@ -220,11 +222,10 @@ void UserInterface::order(){
 void UserInterface::delivery(std::string fileIn){
     //needs file io
 
-    //Take information from a file listing the delivery
-    // shipment of books.  The file will contain the title
-    // and the count of each book included in the shipment.
-    // Read the file, and update the have values in the inventory
-    // accordingly (the employee will then shelve the actual books from the shipment).
+    //Take information from a file listing the delivery shipment of books.
+    //  The file will contain the title and the count of each book included in the shipment.
+    // Read the file, and update the have values in the inventory accordingly
+    // (the employee will then shelve the actual books from the shipment).
     // Note that the program must add any item to the inventory if
     // the delivered title is not present in the current inventory (
     // for instance if an extra book not requested was delivered).
@@ -238,15 +239,78 @@ void UserInterface::delivery(std::string fileIn){
     // picking up the book, and leaves the book by the counter. The book is then
     // considered sold (the person should be removed from wait list).
 
-//    std::ifstream fin (fileIn);
+    std::ifstream fin (fileIn);
+
+    std::string currentTitle;
+    Book* currentBook;
+    int numberOfBooks = 0;
+
+    if (fin){
+        while(fin) {
+            std::string str = "";
+            getline(fin, str);
+            //createBookFromString(*this, str);
+            //gets a string from file
+            std::stringstream parts(fileIn);
+            std::string part;
+
+            //parses the first part for the title
+            getline(parts, part, ',');
+            //Book* bookToAdd = thisBookList.insertBook(part);
+            currentTitle = part;
+            currentBook = currentBookstore.findBook(currentTitle);
+
+            if (currentBook==nullptr){ //if the book doesn't exist, this adds a new book
+
+                currentBook = currentBookstore.addBook(currentTitle);
+
+                getline(parts, part, ',');
+                numberOfBooks = stoi(part);
+                currentBook->setHave(numberOfBooks);
+
+                currentBook->setWant(0);
+                currentBook->setPrice(0);
+
+            } else {
+
+                getline(parts, part, ',');
+                numberOfBooks = stoi(part);
+                int numberOfBooksWanted = currentBook->getWant();
+
+                while(numberOfBooksWanted!=0){
+
+                    //contact the person and sell the book to them
+
+                    //prints out the book name
+                    std::cout << currentTitle << std::endl;
+
+                    //gets info about the person
+                    currentBook->removeFromWaitingList();
+
+                    // we might be able to delete this stuff, I want to keep it for now in case something goes wrong
+//                    LinkedQueue<Person> customers = currentBook->getWaitingList();
+//                    Person currentCustomer = customers.dequeue();
 //
-//    if (fin){
-//        while(fin) {
-//            std::string str = "";
-//            getline(fin, str);
-//            //createBookFromString(*this, str);
-//        }
-//    }
+//                    //get and print name
+//                    std::cout << currentCustomer.getName() << std::endl;
+//
+//                    //get and print preferred contact info
+//                    std::cout << currentCustomer.getPreferredContactInfo() << std::endl;
+
+                    //subtracts one from the number of books from the shipment
+                    numberOfBooks--;
+                    //subtracts one from the number of books wanted
+                    currentBook->setWant(currentBook->getWant()-1);
+                }
+                //adds remaining books to the inventory
+                currentBook->setHave((currentBook->getHave()+numberOfBooks));
+            }
+
+        }
+    }else{
+        std::cout << "There was an error with opening the file '"  << fileIn <<"'"<< std::endl;
+        std::cout << "Please try again or enter another command" << std::endl;
+    }
 
 
 
@@ -349,7 +413,9 @@ void UserInterface::run(){
         }
         else if(input=="d"){
             //run delivery function
-           // delivery();
+            std::cout << "Please enter the name of the delivery info file" << std::endl;
+            getline(cin,input);
+            delivery(input);
         }
         else if(input=="r"){
             //run returnFunction
