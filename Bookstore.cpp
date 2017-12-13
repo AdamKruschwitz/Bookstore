@@ -8,11 +8,11 @@ Bookstore::Bookstore() {
     if(bookList==nullptr) {
         bookList = new BookList();
     }
-    loadLibrary();
+    //loadLibrary();
 }
 
 Bookstore::~Bookstore() {
-    saveLibrary();
+    //saveLibrary();
     bookList->~BookList();
     bookList = nullptr;
 }
