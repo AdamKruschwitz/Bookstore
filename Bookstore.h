@@ -13,7 +13,7 @@
 
 class Bookstore {
 private:
-    BookList* bookList = nullptr;
+    BookList* bookList;
 
 public:
     /**

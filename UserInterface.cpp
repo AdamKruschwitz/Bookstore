@@ -11,8 +11,7 @@
 using namespace std;
 
 UserInterface::UserInterface(){
-     currentBookstore =  Bookstore();
-
+     //currentBookstore =  Bookstore();
 }
 
 void UserInterface::help(){
@@ -64,7 +63,7 @@ std::string getBookInfo(Book* book) {
 void UserInterface::list(){
     //list the info for the inventory
     for(int i = 0; i < currentBookstore.getLibrarySize(); i++) {
-        std::cout << getBookInfo(currentBookstore.getBookAt(i));
+        std::cout << getBookInfo(currentBookstore.getBookAt(i)) << std::endl;
     }
 }
 
