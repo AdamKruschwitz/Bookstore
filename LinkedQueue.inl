@@ -37,9 +37,10 @@ LinkedQueue<T>::LinkedQueue(const LinkedQueue& queueToCopy){
 template <class T>
 LinkedQueue<T>::~LinkedQueue(){
     while (front != nullptr){
-        LinkedNode<T>* toDelete = end;
-        front = front->getNext();
-        delete toDelete;
+        dequeue();
+//        LinkedNode<T>* toDelete = end;
+//        front = front->getNext();
+//        delete toDelete;
     }
 }
 

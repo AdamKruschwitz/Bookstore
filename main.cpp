@@ -37,8 +37,8 @@ void testGetAndSetFunctions() {
 
 void bookListTest () {
     BookList testList = BookList();
-    Book* book1 = testList.insertBook("book1");
-    Book* book2 = testList.insertBook("book2");
+    Book* book1 = testList.insertBook("book2");
+    Book* book2 = testList.insertBook("book1");
     Book* book3 = testList.insertBook("book2");
 
 
