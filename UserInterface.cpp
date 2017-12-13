@@ -224,7 +224,6 @@ void UserInterface::delivery(){
     // picking up the book, and leaves the book by the counter. The book is then
     // considered sold (the person should be removed from wait list).
 
-
 }
 
 void UserInterface::returnFunction(){
