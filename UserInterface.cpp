@@ -218,7 +218,7 @@ void UserInterface::order(){
     std::cout << "order list written in order.txt" << std::endl;
 }
 
-void UserInterface::delivery(){
+void UserInterface::delivery(std::string fileIn){
     //needs file io
 
     //Take information from a file listing the delivery
@@ -238,6 +238,19 @@ void UserInterface::delivery(){
     // to inform the person that their book is waiting, writes a note marking who is
     // picking up the book, and leaves the book by the counter. The book is then
     // considered sold (the person should be removed from wait list).
+
+//    std::ifstream fin (fileIn);
+//
+//    if (fin){
+//        while(fin) {
+//            std::string str = "";
+//            getline(fin, str);
+//            //createBookFromString(*this, str);
+//        }
+//    }
+
+
+
 
 }
 
@@ -279,7 +292,7 @@ void UserInterface::run(){
 
     std::string input ="";
     while (input != "q"){
-        std::cout << "Welcome to BookStore 2: Electric Boogaloo!\n Please enter a command, or type in 'h' for help" << std::endl;
+        std::cout << "\nWelcome to BookStore 2: Electric Boogaloo!\n \n Please enter a command, or type in 'h' for help" << std::endl;
 
         getline(cin,input);
 
@@ -290,7 +303,7 @@ void UserInterface::run(){
         for (std::string::size_type i=0; i<str.length(); ++i)
             std::cout << std::tolower(str[i],loc);
         //input = std::tolower(input);
-
+        std::cout << "\n" ;
         if (input=="h"){
             help();
         }
@@ -337,7 +350,7 @@ void UserInterface::run(){
         }
         else if(input=="d"){
             //run delivery function
-            delivery();
+           // delivery();
         }
         else if(input=="r"){
             //run returnFunction

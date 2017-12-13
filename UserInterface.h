@@ -34,7 +34,7 @@ public:
 
     void order();
 
-    void delivery();
+    void delivery(std::string fileIn);
 
     void returnFunction();
 
