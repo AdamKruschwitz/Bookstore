@@ -35,29 +35,34 @@ void UserInterface::inquire(std::string title){
     //find matching book
     //print out info
     Book* current = currentBookstore.findBook(title); //doesnt work yet, might work now though
-
-    std::cout << current->getTitle() << std::endl;
-    std::cout << "Have Value = " << current->getHave()<< std::endl;
-    std::cout << "Want Value = " << current->getWant() << std::endl;
-    std::cout << "Current Price = $" << current->getPrice() << std::endl;
-    std::cout << "Waiting List: ";
-    LinkedQueue<Person> waitingList = current->getWaitingList();
-    while(!waitingList.isEmpty()) {
-        std::cout << waitingList.dequeue().getName() + ", ";
+    if(current==nullptr) {
+        std::cout << "this book does not yet exist in the library" << std::endl;
     }
-    std::cout << std::endl;
+    else {
+
+        std::cout << current->getTitle() << std::endl;
+        std::cout << "Have Value = " << current->getHave() << std::endl;
+        std::cout << "Want Value = " << current->getWant() << std::endl;
+        std::cout << "Current Price = $" << current->getPrice() << std::endl;
+        std::cout << "Waiting List: ";
+        LinkedQueue<Person> waitingList = current->getWaitingList();
+        while (!waitingList.isEmpty()) {
+            std::cout << waitingList.dequeue().getName() + ", ";
+        }
+        std::cout << std::endl;
+    }
 }
 
 std::string getBookInfo(Book* book) {
     std::string out = "";
     LinkedQueue<Person> waitingList = book->getWaitingList();
     out += book->getTitle() + ", ";
-    out += "price: $" + std::to_string(book->getPrice());
-    out += "have: " + std::to_string(book->getHave());
-    out += "want: " + std::to_string(book->getWant());
+    out += "price: $" + std::to_string(book->getPrice()) + ", ";
+    out += "have: " + std::to_string(book->getHave()) + ", ";
+    out += "want: " + std::to_string(book->getWant()) + ", ";
     out += "waitlist: ";
     while(!waitingList.isEmpty()) {
-        out+=waitingList.dequeue().getName();
+        out+=waitingList.dequeue().getName() + ", ";
     }
     return out;
 }
@@ -80,7 +85,8 @@ void UserInterface::add(std::string title){
 
     //check if book exists
 
-    if(currentBookstore.findBook(title)!= nullptr){
+
+    if(currentBookstore.findBook(title)!=nullptr){
         std::cout << "This book already exists" << std::endl;
         inquire(title);
 
@@ -174,7 +180,7 @@ void UserInterface::sell(std::string title){
         while(contact == "") {
             std::cout << "enter customer's preffered contact method (text, call, email)" << std::endl;
             getline(cin, contact);
-            if(contact != "text" || contact != "call" || contact != "email") {
+            if(contact != "text" && contact != "call" && contact != "email") {
                 contact = "";
                 std::cout << "please enter 'text', 'call', or 'email'" << std::endl;
             }

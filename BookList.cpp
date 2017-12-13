@@ -11,7 +11,6 @@ BookList::BookList() {
     booksCapacity = 5;
     bookNumber = 0;
     books = new Book*[booksCapacity];
-    std::cout << books << std::endl;
 }
 
 
@@ -66,10 +65,10 @@ Book* findBook(Book* bookToCompare, Book** array, int size) {
     if(size <= 0) {
         return nullptr;
     }
-    else if ((&array[mid]) == &bookToCompare) {
+    else if ((*array[mid]) == *bookToCompare) {
         return array[mid];
     }
-    else if (&array[mid] < &bookToCompare) {
+    else if (*array[mid] < *bookToCompare) {
         return findBook(bookToCompare, array+mid, size-mid);
     }
     else {
@@ -79,7 +78,14 @@ Book* findBook(Book* bookToCompare, Book** array, int size) {
 
 Book* BookList::getBook(std::string bookTitle) {
     Book* bookToCompare = new Book(bookTitle);
-    return findBook(bookToCompare, books, bookNumber);
+    for(int i=0; i < bookNumber; i++) {
+        if(*bookToCompare == *books[i]) {
+            delete bookToCompare;
+            return books[i];
+        }
+    }
+    return nullptr;
+
 }
 
 void BookList::saveList() {
