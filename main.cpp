@@ -35,21 +35,25 @@ void testGetAndSetFunctions() {
     }
 }
 
-void testCopyConstructor() {
+void bookListTest () {
+    BookList testList = BookList();
+    Book* book1 = testList.insertBook("book1");
+    Book* book2 = testList.insertBook("book2");
+    Book* book3 = testList.insertBook("book2");
 
-}
 
-void testRestock() {
-
+    Book* book4 = testList.getBook("book1");
+    Book* book5 = testList.getBook("book2");
+    Book* book6 = testList.getBook("book3");
+    std::cout << (book1==book4) << std::endl;
+    std::cout << (book2==book5) << std::endl;
+    std::cout << (nullptr==book6) << std::endl;
+    std::cout << (nullptr==book3) << std::endl;
 }
 
 int main() {
     testGetAndSetFunctions();
-
-    Book* book1 = new Book("first");
-    Book* book2 = new Book("second");
-
-    std::cout << (book1==book2) << std::endl;
+    bookListTest();
 
 
 

@@ -8,6 +8,8 @@
 //#include "ArrayList.h"
 #include "BookList.h"
 #include <fstream>
+#include <sstream>
+#include <istream>
 using namespace std;
 
 UserInterface::UserInterface(){
@@ -33,29 +35,34 @@ void UserInterface::inquire(std::string title){
     //find matching book
     //print out info
     Book* current = currentBookstore.findBook(title); //doesnt work yet, might work now though
-
-    std::cout << current->getTitle() << std::endl;
-    std::cout << "Have Value = " << current->getHave()<< std::endl;
-    std::cout << "Want Value = " << current->getWant() << std::endl;
-    std::cout << "Current Price = $" << current->getPrice() << std::endl;
-    std::cout << "Waiting List: ";
-    LinkedQueue<Person> waitingList = current->getWaitingList();
-    while(!waitingList.isEmpty()) {
-        std::cout << waitingList.dequeue().getName() + ", ";
+    if(current==nullptr) {
+        std::cout << "this book does not yet exist in the library" << std::endl;
     }
-    std::cout << std::endl;
+    else {
+
+        std::cout << current->getTitle() << std::endl;
+        std::cout << "Have Value = " << current->getHave() << std::endl;
+        std::cout << "Want Value = " << current->getWant() << std::endl;
+        std::cout << "Current Price = $" << current->getPrice() << std::endl;
+        std::cout << "Waiting List: ";
+        LinkedQueue<Person> waitingList = current->getWaitingList();
+        while (!waitingList.isEmpty()) {
+            std::cout << waitingList.dequeue().getName() + ", ";
+        }
+        std::cout << std::endl;
+    }
 }
 
 std::string getBookInfo(Book* book) {
     std::string out = "";
     LinkedQueue<Person> waitingList = book->getWaitingList();
     out += book->getTitle() + ", ";
-    out += "price: $" + std::to_string(book->getPrice());
-    out += "have: " + std::to_string(book->getHave());
-    out += "want: " + std::to_string(book->getWant());
+    out += "price: $" + std::to_string(book->getPrice()) + ", ";
+    out += "have: " + std::to_string(book->getHave()) + ", ";
+    out += "want: " + std::to_string(book->getWant()) + ", ";
     out += "waitlist: ";
     while(!waitingList.isEmpty()) {
-        out+=waitingList.dequeue().getName();
+        out+=waitingList.dequeue().getName() + ", ";
     }
     return out;
 }
@@ -78,7 +85,8 @@ void UserInterface::add(std::string title){
 
     //check if book exists
 
-    if(currentBookstore.findBook(title)){
+
+    if(currentBookstore.findBook(title)!=nullptr){
         std::cout << "This book already exists" << std::endl;
         inquire(title);
 
@@ -172,7 +180,7 @@ void UserInterface::sell(std::string title){
         while(contact == "") {
             std::cout << "enter customer's preffered contact method (text, call, email)" << std::endl;
             getline(cin, contact);
-            if(contact != "text" || contact != "call" || contact != "email") {
+            if(contact != "text" && contact != "call" && contact != "email") {
                 contact = "";
                 std::cout << "please enter 'text', 'call', or 'email'" << std::endl;
             }
@@ -217,14 +225,13 @@ void UserInterface::order(){
     std::cout << "order list written in order.txt" << std::endl;
 }
 
-void UserInterface::delivery(){
+void UserInterface::delivery(std::string fileIn){
     //needs file io
 
-    //Take information from a file listing the delivery
-    // shipment of books.  The file will contain the title
-    // and the count of each book included in the shipment.
-    // Read the file, and update the have values in the inventory
-    // accordingly (the employee will then shelve the actual books from the shipment).
+    //Take information from a file listing the delivery shipment of books.
+    //  The file will contain the title and the count of each book included in the shipment.
+    // Read the file, and update the have values in the inventory accordingly
+    // (the employee will then shelve the actual books from the shipment).
     // Note that the program must add any item to the inventory if
     // the delivered title is not present in the current inventory (
     // for instance if an extra book not requested was delivered).
@@ -237,6 +244,82 @@ void UserInterface::delivery(){
     // to inform the person that their book is waiting, writes a note marking who is
     // picking up the book, and leaves the book by the counter. The book is then
     // considered sold (the person should be removed from wait list).
+
+    std::ifstream fin (fileIn);
+
+    std::string currentTitle;
+    Book* currentBook;
+    int numberOfBooks = 0;
+
+    if (fin){
+        while(fin) {
+            std::string str = "";
+            getline(fin, str);
+            //createBookFromString(*this, str);
+            //gets a string from file
+            std::stringstream parts(fileIn);
+            std::string part;
+
+            //parses the first part for the title
+            getline(parts, part, ',');
+            //Book* bookToAdd = thisBookList.insertBook(part);
+            currentTitle = part;
+            currentBook = currentBookstore.findBook(currentTitle);
+
+            if (currentBook==nullptr){ //if the book doesn't exist, this adds a new book
+
+                currentBook = currentBookstore.addBook(currentTitle);
+
+                getline(parts, part, ',');
+                numberOfBooks = stoi(part);
+                currentBook->setHave(numberOfBooks);
+
+                currentBook->setWant(0);
+                currentBook->setPrice(0);
+
+            } else {
+
+                getline(parts, part, ',');
+                numberOfBooks = stoi(part);
+                int numberOfBooksWanted = currentBook->getWant();
+
+                while(numberOfBooksWanted!=0){
+
+                    //contact the person and sell the book to them
+
+                    //prints out the book name
+                    std::cout << currentTitle << std::endl;
+
+                    //gets info about the person
+                    currentBook->removeFromWaitingList();
+
+                    // we might be able to delete this stuff, I want to keep it for now in case something goes wrong
+//                    LinkedQueue<Person> customers = currentBook->getWaitingList();
+//                    Person currentCustomer = customers.dequeue();
+//
+//                    //get and print name
+//                    std::cout << currentCustomer.getName() << std::endl;
+//
+//                    //get and print preferred contact info
+//                    std::cout << currentCustomer.getPreferredContactInfo() << std::endl;
+
+                    //subtracts one from the number of books from the shipment
+                    numberOfBooks--;
+                    //subtracts one from the number of books wanted
+                    currentBook->setWant(currentBook->getWant()-1);
+                }
+                //adds remaining books to the inventory
+                currentBook->setHave((currentBook->getHave()+numberOfBooks));
+            }
+
+        }
+    }else{
+        std::cout << "There was an error with opening the file '"  << fileIn <<"'"<< std::endl;
+        std::cout << "Please try again or enter another command" << std::endl;
+    }
+
+
+
 
 }
 
@@ -278,7 +361,7 @@ void UserInterface::run(){
 
     std::string input ="";
     while (input != "q"){
-        std::cout << "Welcome to BookStore 2: Electric Boogaloo!\n Please enter a command, or type in 'h' for help" << std::endl;
+        std::cout << "\nWelcome to BookStore 2: Electric Boogaloo!\n \n Please enter a command, or type in 'h' for help" << std::endl;
 
         getline(cin,input);
 
@@ -289,7 +372,7 @@ void UserInterface::run(){
         for (std::string::size_type i=0; i<str.length(); ++i)
             std::cout << std::tolower(str[i],loc);
         //input = std::tolower(input);
-
+        std::cout << "\n" ;
         if (input=="h"){
             help();
         }
@@ -336,7 +419,9 @@ void UserInterface::run(){
         }
         else if(input=="d"){
             //run delivery function
-            delivery();
+            std::cout << "Please enter the name of the delivery info file" << std::endl;
+            getline(cin,input);
+            delivery(input);
         }
         else if(input=="r"){
             //run returnFunction
