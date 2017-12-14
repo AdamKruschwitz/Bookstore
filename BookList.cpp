@@ -3,6 +3,7 @@
 //
 
 #include "BookList.h"
+#include "Bookstore.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>

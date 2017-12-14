@@ -364,7 +364,6 @@ void UserInterface::quit(){
 }
 void UserInterface::run(){
 
-
     std::string input ="";
     while (input != "q"){
         std::cout << "\nWelcome to BookStore 2: Electric Boogaloo!\n \n Please enter a command, or type in 'h' for help" << std::endl;
