@@ -20,7 +20,7 @@ public:
     virtual ~Queue(){};
     
     //adds an item to the end of the queue
-    virtual void enqueue(T item)=0;
+    virtual void enqueue(T& item)=0;
 
     //takes an item off the front of the queue and returns it
     //throws out_of_range exception if the queue is empty

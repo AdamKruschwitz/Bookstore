@@ -64,6 +64,9 @@ std::string getBookInfo(Book* book) {
     while(!waitingList.isEmpty()) {
         out+=waitingList.dequeue().getName() + ", ";
     }
+    out.pop_back();
+    out.pop_back();
+
     return out;
 }
 

@@ -33,7 +33,7 @@ public:
     void setWant(int newWant);
     void setPrice(double newPrice);
     void setTitle(std::string newTitle);
-    void addToWaitingList(Person newPerson);
+    void addToWaitingList(Person& newPerson);
     void removeFromWaitingList();
     int calculateRestock();
     LinkedQueue<Person> getWaitingList();

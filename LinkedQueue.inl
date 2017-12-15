@@ -36,17 +36,18 @@ LinkedQueue<T>::LinkedQueue(const LinkedQueue& queueToCopy){
 template <class T>
 LinkedQueue<T>::~LinkedQueue(){
     while (front != nullptr){
-        //dequeue();
+       // dequeue();
         LinkedNode<T>* toDelete = front;
         front = front->getNext();
         delete toDelete;
+        toDelete = nullptr;
     }
 }
 
 
 //adds an item to the end of the queue
 template <class T>
-void LinkedQueue<T>::enqueue(T item){
+void LinkedQueue<T>::enqueue(T& item){
     LinkedNode<T>* newNode = new LinkedNode<T>(item);
     //if front is nullptr, end should be nullptr too
     if (front == nullptr){

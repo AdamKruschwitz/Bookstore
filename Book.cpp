@@ -94,7 +94,7 @@ void Book::restock(int numNewCopies) {
     have += numNewCopies;
 }
 
-void Book::addToWaitingList(Person person) {
+void Book::addToWaitingList(Person& person) {
     waitingList.enqueue(person);
 }
 
