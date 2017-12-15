@@ -128,30 +128,35 @@ void UserInterface::add(std::string title){
 
 }
 
-void UserInterface::modify(std::string title){
+void UserInterface::modify(std::string title) {
     //Modify the want value for the specified title.
     // Display current want and have values,
     // and prompt user for new want value.
-    Book* currentBook = currentBookstore.findBook(title);
-    std::cout << currentBook->getTitle() << std::endl;
-    std::cout << "Want: " + std::to_string(currentBook->getWant()) << std::endl;
-    std::cout << "Have: " + std::to_string(currentBook->getHave()) << std::endl;
-    std::cout << "Price: " + std::to_string(currentBook->getPrice()) << std::endl;
-    std::cout << "Enter new want value " << std::endl;
-    std::string wantIn = "";
-    getline(cin, wantIn);
+    Book *currentBook = currentBookstore.findBook(title);
+    if (currentBook != nullptr) {
+        std::cout << currentBook->getTitle() << std::endl;
+        std::cout << "Want: " + std::to_string(currentBook->getWant()) << std::endl;
+        std::cout << "Have: " + std::to_string(currentBook->getHave()) << std::endl;
+        std::cout << "Price: " + std::to_string(currentBook->getPrice()) << std::endl;
+        std::cout << "Enter new want value " << std::endl;
+        std::string wantIn = "";
+        getline(cin, wantIn);
 
-    int intWantIn = stoi(wantIn);
-    currentBook->setWant(intWantIn);
-    std::cout << "Want value changed to " + std::to_string(intWantIn) << std::endl;
+        int intWantIn = stoi(wantIn);
+        currentBook->setWant(intWantIn);
+        std::cout << "Want value changed to " + std::to_string(intWantIn) << std::endl;
 
-    std::cout << "Enter new price" << std::endl;
-    std::string priceIn = "";
-    getline(cin, priceIn);
+        std::cout << "Enter new price" << std::endl;
+        std::string priceIn = "";
+        getline(cin, priceIn);
 
-    double doublePriceIn = stod(priceIn);
-    currentBook->setPrice(doublePriceIn);
-    std::cout << "Price changed to " + std::to_string(doublePriceIn) << std::endl;
+        double doublePriceIn = stod(priceIn);
+        currentBook->setPrice(doublePriceIn);
+        std::cout << "Price changed to " + std::to_string(doublePriceIn) << std::endl;
+    }
+    else {
+        std::cout << "A book with that title doesn't exist in the inventory" << std::endl;
+    }
 }
 
 void UserInterface::sell(std::string title){
