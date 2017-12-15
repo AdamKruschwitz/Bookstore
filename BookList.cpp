@@ -86,7 +86,6 @@ Book* BookList::getBook(std::string bookTitle) {
         }
     }
     return nullptr;
-
 }
 
 void BookList::saveList() {

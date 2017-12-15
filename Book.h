@@ -20,12 +20,11 @@ private:
 
 public:
     Book();
-    Book(std::string title);
+    explicit Book(std::string title);
     Book(Book& bookToCopy);
-    bool operator==(const Book other);
-    bool operator<(const Book other);
-    bool operator>(const Book other);
-    ~Book();
+    bool operator==(Book other);
+    bool operator<(Book other);
+    bool operator>(Book other);
     int getHave();
     int getWant();
     double getPrice();

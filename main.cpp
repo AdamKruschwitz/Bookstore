@@ -41,7 +41,6 @@ void bookListTest () {
     Book* book2 = testList.insertBook("book1");
     Book* book3 = testList.insertBook("book2");
 
-
     Book* book4 = testList.getBook("book1");
     Book* book5 = testList.getBook("book2");
     Book* book6 = testList.getBook("book3");
@@ -49,11 +48,37 @@ void bookListTest () {
     std::cout << (book2==book5) << std::endl;
     std::cout << (nullptr==book6) << std::endl;
     std::cout << (nullptr==book3) << std::endl;
+    delete book1;
+    delete book2;
+    //delete book3;
+    //delete book4;
+    //delete book5;
+    //delete book6;
+}
+
+void bookComparatorTest () {
+    std::cout << "I started the tes" << std::endl;
+    Book* book1 = new Book("book1");
+    Book* book2 = new Book("book1");
+    std::cout << "I made the books" << std::endl;
+    Person person1 = Person();
+    book1->addToWaitingList(person1);
+    std::cout << (*book1==*book2) << std::endl;
+}
+
+void linkedQueueTest() {
+    LinkedQueue<Person> test;
+    Person* person1 = new Person();
+    person1->setName("person1");
+    test.enqueue(*person1);
 }
 
 int main() {
+    linkedQueueTest();
+    std::cout << "we made it past linkedQueue test" << std::endl;
     testGetAndSetFunctions();
     bookListTest();
+    bookComparatorTest();
 
 
 

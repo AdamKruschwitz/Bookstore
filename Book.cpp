@@ -22,7 +22,7 @@ Book::Book(std::string title) {
 Book::Book(Book& bookToCopy) {
     //delete waitingList;
     //need a new way to delete waitingList
-    waitingList.~LinkedQueue();
+    //waitingList.~LinkedQueue();
     waitingList = LinkedQueue<Person>(bookToCopy.waitingList);
     have = bookToCopy.have;
     want = bookToCopy.want;
@@ -31,12 +31,7 @@ Book::Book(Book& bookToCopy) {
 }
 
 bool Book::operator==(const Book other) {
-    if(this->title == other.title) {
-        return true;
-    }
-    else {
-        return false;
-    }
+    return this->title == other.title;
 }
 
 bool Book::operator<(const Book other) {
@@ -55,10 +50,6 @@ bool Book::operator>(const Book other) {
     else {
         return false;
     }
-}
-
-Book::~Book() {
-    waitingList.~LinkedQueue();
 }
 
 int Book::getHave() {
