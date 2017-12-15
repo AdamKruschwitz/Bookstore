@@ -70,7 +70,21 @@ void linkedQueueTest() {
     LinkedQueue<Person> test;
     Person* person1 = new Person();
     person1->setName("person1");
+    Person* person2 = new Person();
+    person2->setName("person2");
     test.enqueue(*person1);
+    test.enqueue(*person2);
+    LinkedQueue<Person> testCopyConstructor = LinkedQueue<Person>(test);
+    std::cout << test.dequeue().getName() << std::endl;
+    std::cout << test.dequeue().getName() << std::endl;
+    try {
+        std::cout << test.dequeue().getName() << std::endl;
+    } catch (std::out_of_range&){
+        std::cout << "we gucci" << std::endl;
+    }
+    std::cout << testCopyConstructor.dequeue().getName() << std::endl;
+    delete person1;
+    delete person2;
 }
 
 int main() {
@@ -81,6 +95,7 @@ int main() {
     bookListTest();
     bookComparatorTest();
      */
+    linkedQueueTest();
 
 
 
