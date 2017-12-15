@@ -133,7 +133,7 @@ void createBookFromString(BookList& thisBookList, std::string data){
 
     //parses again to get the price
     getline(parts, part, ',');
-    int price = stoi(part);
+    double price = stod(part);
     bookToAdd->setPrice(price);
 
 }

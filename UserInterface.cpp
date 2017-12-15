@@ -102,13 +102,16 @@ void UserInterface::add(std::string title){
 
         std::string haveIn = "";
         getline(cin, haveIn);
+
+        //return num;
         int haveInt = stoi(haveIn);
 
         std::cout << "Please enter the price" << std::endl;
 
         std::string priceIn = "";
         getline(cin, priceIn);
-        int priceInt = stoi(priceIn);
+
+        double priceInt = stod(priceIn);
 
 
         Book *bookToAdd = currentBookstore.addBook(title);
@@ -143,7 +146,7 @@ void UserInterface::modify(std::string title){
     std::string priceIn = "";
     getline(cin, priceIn);
 
-    double doublePriceIn = stoi(priceIn);
+    double doublePriceIn = stod(priceIn);
     currentBook->setPrice(doublePriceIn);
     std::cout << "Price changed to " + std::to_string(doublePriceIn) << std::endl;
 }
