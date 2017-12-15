@@ -36,6 +36,7 @@ Book& Book::operator=(const Book other) {
     want = other.want;
     price = other.price;
     title = other.title;
+    return *this;
 }
 
 bool Book::operator==(const Book other) {
