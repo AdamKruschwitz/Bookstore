@@ -19,12 +19,12 @@ LinkedQueue<T>::LinkedQueue(const LinkedQueue& queueToCopy){
     }
     else {
         LinkedNode<T>* nodeToCopy = queueToCopy.front;
-        front = new LinkedNode<T>(nodeToCopy->getItem());
+        front = new LinkedNode<T>(*nodeToCopy);
         end = front;
 
         nodeToCopy = nodeToCopy->getNext();
         while (nodeToCopy != nullptr){
-            LinkedNode<T>* newNode = new LinkedNode<T>(nodeToCopy->getItem());
+            LinkedNode<T>* newNode = new LinkedNode<T>(*nodeToCopy);
             end->setNext(newNode);
             end = newNode;
             nodeToCopy = nodeToCopy->getNext();

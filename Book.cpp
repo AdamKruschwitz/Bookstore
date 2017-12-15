@@ -39,26 +39,16 @@ Book& Book::operator=(const Book other) {
     return *this;
 }
 
-bool Book::operator==(const Book other) {
+bool Book::operator==(Book& other) {
     return this->title == other.title;
 }
 
-bool Book::operator<(const Book other) {
-    if(this->title < other.title) {
-        return true;
-    }
-    else {
-        return false;
-    }
+bool Book::operator<(Book& other) {
+    return this->title < other.title;
 }
 
-bool Book::operator>(const Book other) {
-    if(this->title > other.title) {
-        return true;
-    }
-    else {
-        return false;
-    }
+bool Book::operator>(Book& other) {
+    return this->title > other.title;
 }
 
 int Book::getHave() {

@@ -23,9 +23,9 @@ public:
     explicit Book(std::string title);
     Book(Book& bookToCopy);
     Book& operator=(Book other);
-    bool operator==(Book other);
-    bool operator<(Book other);
-    bool operator>(Book other);
+    bool operator==(Book& other);
+    bool operator<(Book& other);
+    bool operator>(Book& other);
     int getHave();
     int getWant();
     double getPrice();

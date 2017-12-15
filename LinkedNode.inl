@@ -3,7 +3,7 @@
 //
 #include "LinkedNode.h"
 template <class T>
-LinkedNode<T>::LinkedNode(T item){
+LinkedNode<T>::LinkedNode(T& item){
     this->item = item;
     next = nullptr;
 }
@@ -25,7 +25,7 @@ LinkedNode<T>* LinkedNode<T>::getNext(){
 }
 
 template <class T>
-void LinkedNode<T>::setItem(T newItem){
+void LinkedNode<T>::setItem(T& newItem){
     item = newItem;
 }
 
