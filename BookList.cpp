@@ -12,10 +12,12 @@ BookList::BookList() {
     booksCapacity = 5;
     bookNumber = 0;
     books = new Book*[booksCapacity];
+    loadList();
 }
 
 
 BookList::~BookList() {
+    saveList();
     delete[] books;
     books = nullptr;
 }
@@ -100,9 +102,9 @@ void BookList::saveList() {
         for (int i = 0; i < bookNumber; ++i) {
             Book *current = (books[i]);
             title = current->getTitle();
-            want = current->getWant();
-            have = current->getHave();
-            price = current->getPrice();
+            want = std::to_string(current->getWant());
+            have = std::to_string(current->getHave());
+            price = std::to_string(current->getPrice());
             output += title + "," + want + "," + have + "," + price + "\n";
         }
         fout << output;
@@ -112,30 +114,32 @@ void BookList::saveList() {
 }
 
 void createBookFromString(BookList& thisBookList, std::string data){
+    if(data!="") {
 
-    //gets a string from file
-    std::stringstream parts(data);
-    std::string part;
+        //gets a string from file
+        std::stringstream parts(data);
+        std::string part;
 
-    //parses the first part for the title and creates a book with it
-    getline(parts, part, ',');
-    Book* bookToAdd = thisBookList.insertBook(part);
+        //parses the first part for the title and creates a book with it
+        getline(parts, part, ',');
+        Book *bookToAdd = thisBookList.insertBook(part);
 
-    //parses again to get want value
-    getline(parts, part, ',');
-    int want = stoi(part);
-    bookToAdd->setWant(want);
+        //parses again to get want value
+        getline(parts, part, ',');
+        int want = stoi(part);
+        bookToAdd->setWant(want);
 
-    //parses again to get have value
-    getline(parts, part, ',');
-    int have = stoi(part);
-    bookToAdd->setHave(have);
+        //parses again to get have value
+        getline(parts, part, ',');
+        int have = stoi(part);
+        bookToAdd->setHave(have);
 
-    //parses again to get the price
-    getline(parts, part, ',');
-    double price = stod(part);
-    bookToAdd->setPrice(price);
+        //parses again to get the price
+        getline(parts, part, ',');
+        double price = stod(part);
+        bookToAdd->setPrice(price);
 
+    }
 }
 
 void BookList::loadList() {
