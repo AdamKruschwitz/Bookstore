@@ -220,7 +220,7 @@ void UserInterface::order(){
     // For each book, enough books should be ordered
     // so that, when the order is received, the have value
     // will be equal to the want value.
-    fstream fout ("order.txt");
+    std::ofstream fout ("order.txt");
     int librarySize = currentBookstore.getLibrarySize();
     for (int i = 0; i<librarySize; i++) {
         Book* currentBook = currentBookstore.getBookAt(i);
