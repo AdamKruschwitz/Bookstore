@@ -30,6 +30,14 @@ Book::Book(Book& bookToCopy) {
     title = bookToCopy.title;
 }
 
+Book& Book::operator=(const Book other) {
+    waitingList = LinkedQueue<Person>(other.waitingList);
+    have = other.have;
+    want = other.want;
+    price = other.price;
+    title = other.title;
+}
+
 bool Book::operator==(const Book other) {
     return this->title == other.title;
 }

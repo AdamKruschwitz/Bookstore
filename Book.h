@@ -22,6 +22,7 @@ public:
     Book();
     explicit Book(std::string title);
     Book(Book& bookToCopy);
+    Book& operator=(Book other);
     bool operator==(Book other);
     bool operator<(Book other);
     bool operator>(Book other);

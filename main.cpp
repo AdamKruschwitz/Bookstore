@@ -59,7 +59,7 @@ void bookListTest () {
 void bookComparatorTest () {
     std::cout << "I started the tes" << std::endl;
     Book* book1 = new Book("book1");
-    Book* book2 = new Book("book1");
+    Book* book2 = new Book("book2");
     std::cout << "I made the books" << std::endl;
     Person person1 = Person();
     book1->addToWaitingList(person1);
@@ -87,15 +87,25 @@ void linkedQueueTest() {
     delete person2;
 }
 
+void iWillBreak () {
+    BookList myList;
+    Book* myBook = myList.insertBook("myBook");
+    Person* myPerson = new Person();
+    myPerson->setName("myPerson");
+    myBook->addToWaitingList(*myPerson);
+    myBook = myList.getBook("myBook");
+
+}
+
 int main() {
-    /*
-    linkedQueueTest();
-    std::cout << "we made it past linkedQueue test" << std::endl;
-    testGetAndSetFunctions();
-    bookListTest();
-    bookComparatorTest();
-     */
-    linkedQueueTest();
+
+    //linkedQueueTest();
+    //std::cout << "we made it past linkedQueue test" << std::endl;
+    //testGetAndSetFunctions();
+    //bookListTest();
+    //bookComparatorTest();
+    //linkedQueueTest();
+    iWillBreak();
 
 
 
