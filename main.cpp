@@ -74,11 +74,13 @@ void linkedQueueTest() {
 }
 
 int main() {
+    /*
     linkedQueueTest();
     std::cout << "we made it past linkedQueue test" << std::endl;
     testGetAndSetFunctions();
     bookListTest();
     bookComparatorTest();
+     */
 
 
 
