@@ -1,4 +1,0 @@
-book1,1
-book2,0
-myBook,0
-book3,4

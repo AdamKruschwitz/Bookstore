@@ -18,7 +18,7 @@ UserInterface::UserInterface(){
 
 void UserInterface::help(){
     //lists commands
-    std::cout << "Keyboard shortcut \t command \t description" << std::endl;
+    //std::cout << "Keyboard shortcut \t command \t description" << std::endl;
     std::cout <<"i \t inquire \t Displays information for a specified title" << std::endl;
     std::cout <<"l \t list \t List the information for the entire inventory (in alphabetical order)" << std::endl;
     std::cout <<"a \t add \t Adds a book to the inventory" << std::endl;
@@ -169,15 +169,15 @@ void UserInterface::sell(std::string title){
     Book* currentBook = currentBookstore.findBook(title);
     if(currentBook == nullptr) {
         std::cout << "Book not in library, added to library" << std::endl;
-//        //currentBook = currentBookstore.addBook(title);
+        currentBook = currentBookstore.addBook(title);
 //        if(currentBook== nullptr){
 //            std::cout << "shits broken" << std::endl;
 //        }
-//        currentBook->setWant(1);
-//        currentBook->setHave(0);
-//        currentBook->setPrice(19.99);
-        add(title);
-        currentBook = currentBookstore.findBook(title);
+        currentBook->setWant(1);
+        currentBook->setHave(0);
+        currentBook->setPrice(19.99);
+        //add(title);
+        //currentBook = currentBookstore.findBook(title);
     }
     if(currentBook->getHave() < 1) {
         std::cout << "The book is out of stock, add user to waiting list" << std::endl;
@@ -263,7 +263,7 @@ void UserInterface::delivery(std::string fileIn){
 
     std::ifstream fin (fileIn);
 
-    std::string currentTitle;
+    std::string currentTitle="";
     Book* currentBook;
     int numberOfBooks = 0;
 
@@ -273,34 +273,58 @@ void UserInterface::delivery(std::string fileIn){
             getline(fin, str);
             //createBookFromString(*this, str);
             //gets a string from file
-            std::stringstream parts(fileIn);
+            std::stringstream parts(str);
             std::string part;
 
             //parses the first part for the title
             getline(parts, part, ',');
             //Book* bookToAdd = thisBookList.insertBook(part);
             currentTitle = part;
+
             currentBook = currentBookstore.findBook(currentTitle);
 
             if (currentBook==nullptr){ //if the book doesn't exist, this adds a new book
 
+                if (currentTitle==""){
+                    return;
+                }
+
+
                 currentBook = currentBookstore.addBook(currentTitle);
 
+
                 getline(parts, part, ',');
+//                std::cout<< part << endl;
                 numberOfBooks = stoi(part);
                 currentBook->setHave(numberOfBooks);
 
                 currentBook->setWant(0);
-                currentBook->setPrice(0);
+                currentBook->setPrice(19.99);
+//                inquire(currentBook->getTitle());
 
             } else {
 
                 getline(parts, part, ',');
-                numberOfBooks = stoi(part);
-                int numberOfBooksWanted = currentBook->getWant();
-                //change this to while ppeople exist in waiting list and while we still have books that we can deliver
 
-                while(numberOfBooksWanted!=0){
+
+                numberOfBooks = stoi(part);
+                //int numberOfBooksWanted = currentBook->getWant();
+
+                //change this to while ppeople exist in waiting list and while we still have books that we can deliver
+                //get the waiting list
+                //hold it
+                //while is not empty
+
+                //LinkedQueue<Person> current = currentBook->getWaitingList();
+                //while(currentBook)
+                LinkedQueue<Person> waitingList = currentBook->getWaitingList();
+                while (!waitingList.isEmpty() && numberOfBooks>0){
+
+                //for (int i = 0; i < current.getSize() && numberOfBooks>0; ++i) {
+
+//                }
+//
+//
 
                     //contact the person and sell the book to them
 
@@ -309,6 +333,7 @@ void UserInterface::delivery(std::string fileIn){
 
                     //gets info about the person
                     currentBook->removeFromWaitingList();
+                    waitingList.dequeue();
 
                     // we might be able to delete this stuff, I want to keep it for now in case something goes wrong
 //                    LinkedQueue<Person> customers = currentBook->getWaitingList();

@@ -105,7 +105,20 @@ void BookList::saveList() {
             want = std::to_string(current->getWant());
             have = std::to_string(current->getHave());
             price = std::to_string(current->getPrice());
-            output += title + "," + want + "," + have + "," + price + "\n";
+            output += title + "," + want + "," + have + "," + price+",";
+            LinkedQueue<Person> waitingList = current->getWaitingList();
+            while (!waitingList.isEmpty()){
+
+                            //LinkedQueue<Person> out = current->getWaitingList();
+                            Person guy = waitingList.dequeue();
+                            std::string name = guy.getName() + ",";
+                            std::string email = guy.getEmail() + ",";
+                            std::string number = guy.getNumber()+ ",";
+                            std::string pref = guy.getPreference()+ ",";
+
+                output+= name + email + number + pref;
+            }
+            output += "\n";
         }
         fout << output;
     } else{
@@ -138,6 +151,31 @@ void createBookFromString(BookList& thisBookList, std::string data){
         getline(parts, part, ',');
         double price = stod(part);
         bookToAdd->setPrice(price);
+
+        //getline(parts,part, ',');
+        if (parts){ //add new specific delim
+
+            getline(parts, part, ',');
+            std::string name = part;
+
+            getline(parts, part, ',');
+            std::string email = part;
+
+            getline(parts, part, ',');
+            std::string number = part;
+
+            getline(parts, part, ',');
+            std::string pref = part;
+
+            Person* toAdd = new Person();
+
+            toAdd->setName(name);
+            toAdd->setEmail(email);
+            toAdd->setNumber(number);
+            toAdd->setPreference(pref);
+
+            bookToAdd->addToWaitingList(*toAdd);
+       }
 
     }
 }

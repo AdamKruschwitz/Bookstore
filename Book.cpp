@@ -134,3 +134,9 @@ LinkedQueue<Person> Book::getWaitingList() {
     LinkedQueue<Person> out = LinkedQueue<Person>(waitingList);
     return out;
 }
+
+bool Book::isEmpty(){
+    LinkedQueue<Person> out = LinkedQueue<Person>(waitingList);
+    return out.isEmpty();
+
+}
