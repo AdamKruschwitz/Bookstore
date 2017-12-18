@@ -41,7 +41,7 @@ public:
     /**
      * adds a book to the inventory
      * @param title which is the title of the book that needs to be added
-     * @post adds the book name as weela as information into the inventory
+     * @post adds the book name as well as information into the inventory
      */
     void add(std::string title);
     /**
