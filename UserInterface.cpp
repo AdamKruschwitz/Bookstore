@@ -273,7 +273,7 @@ void UserInterface::delivery(std::string fileIn){
             getline(fin, str);
             //createBookFromString(*this, str);
             //gets a string from file
-            std::stringstream parts(str); //here is the issue
+            std::stringstream parts(str);
             std::string part;
 
             //parses the first part for the title
@@ -294,13 +294,13 @@ void UserInterface::delivery(std::string fileIn){
 
 
                 getline(parts, part, ',');
-                std::cout<< part << endl;
+//                std::cout<< part << endl;
                 numberOfBooks = stoi(part);
                 currentBook->setHave(numberOfBooks);
 
                 currentBook->setWant(0);
                 currentBook->setPrice(19.99);
-                inquire(currentBook->getTitle());
+//                inquire(currentBook->getTitle());
 
             } else {
 
@@ -309,17 +309,22 @@ void UserInterface::delivery(std::string fileIn){
 
                 numberOfBooks = stoi(part);
                 //int numberOfBooksWanted = currentBook->getWant();
+
                 //change this to while ppeople exist in waiting list and while we still have books that we can deliver
                 //get the waiting list
                 //hold it
                 //while is not empty
 
-                LinkedQueue<Person> current = currentBook->getWaitingList();
-                for (int i = 0; i < current.getSize() && numberOfBooks>0; ++i) {
+                //LinkedQueue<Person> current = currentBook->getWaitingList();
+                //while(currentBook)
+                LinkedQueue<Person> waitingList = currentBook->getWaitingList();
+                while (!waitingList.isEmpty() && numberOfBooks>0){
+
+                //for (int i = 0; i < current.getSize() && numberOfBooks>0; ++i) {
 
 //                }
 //
-//                while(numberOfBooksWanted!=0){
+//
 
                     //contact the person and sell the book to them
 
@@ -328,6 +333,7 @@ void UserInterface::delivery(std::string fileIn){
 
                     //gets info about the person
                     currentBook->removeFromWaitingList();
+                    waitingList.dequeue();
 
                     // we might be able to delete this stuff, I want to keep it for now in case something goes wrong
 //                    LinkedQueue<Person> customers = currentBook->getWaitingList();

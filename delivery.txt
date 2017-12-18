@@ -1,5 +1,0 @@
-book1,3
-book2,3
-myBook,7
-book3,4
-moby dick,44
