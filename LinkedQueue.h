@@ -21,6 +21,7 @@ class LinkedQueue : public Queue<T> {
 private:
     LinkedNode<T>* front;
     LinkedNode<T>* end;
+    int size;
 
 public:
     
@@ -42,6 +43,9 @@ public:
 
     //returns true if the queue has no items, false otherwise
     bool isEmpty();
+
+    //returns size
+    int getSize();
 
 };
 
