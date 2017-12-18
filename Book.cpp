@@ -39,16 +39,41 @@ Book& Book::operator=(const Book other) {
     return *this;
 }
 
+std::string cleanTitle(std::string title) {
+    std::string newTitle = "";
+    std::locale loc;
+    for(std::string::size_type i = 0; i < title.length(); i++) {
+        newTitle += std::tolower(title[i], loc);
+    }
+    return newTitle;
+}
+// returns true if s1 is earlier alphabetically than s2. returns true if strings are equal
+bool compareAlphabetically (std::string s1, std::string s2) {
+    bool stringsEqual = true;
+    bool out = s1.length() < s2.length();
+    for(std::string::size_type i = 0; i < s1.length() && s2.length() && stringsEqual; i++) {
+        if(s1[i] > s2[i]) {
+            out = false;
+            stringsEqual = false;
+        }
+        else if(s1[i] < s2[i]) {
+            out = true;
+            stringsEqual = false;
+        }
+    }
+    return out;
+}
+
 bool Book::operator==(Book& other) {
-    return this->title == other.title;
+    return ::cleanTitle(this->title) == ::cleanTitle(other.title);
 }
 
 bool Book::operator<(Book& other) {
-    return this->title < other.title;
+    return compareAlphabetically(::cleanTitle(this->title), ::cleanTitle(other.title));
 }
 
 bool Book::operator>(Book& other) {
-    return this->title > other.title;
+    return compareAlphabetically(::cleanTitle(other.title), ::cleanTitle(this->title));
 }
 
 int Book::getHave() {
