@@ -280,24 +280,33 @@ void UserInterface::delivery(std::string fileIn){
             getline(parts, part, ',');
             //Book* bookToAdd = thisBookList.insertBook(part);
             currentTitle = part;
-            std::cout << currentTitle << std::endl;
+
             currentBook = currentBookstore.findBook(currentTitle);
 
             if (currentBook==nullptr){ //if the book doesn't exist, this adds a new book
 
+                if (currentTitle==""){
+                    return;
+                }
+
+
                 currentBook = currentBookstore.addBook(currentTitle);
-                inquire(currentBook->getTitle());
+
 
                 getline(parts, part, ',');
+                std::cout<< part << endl;
                 numberOfBooks = stoi(part);
                 currentBook->setHave(numberOfBooks);
 
                 currentBook->setWant(0);
                 currentBook->setPrice(19.99);
+                inquire(currentBook->getTitle());
 
             } else {
 
                 getline(parts, part, ',');
+
+
                 numberOfBooks = stoi(part);
                 //int numberOfBooksWanted = currentBook->getWant();
                 //change this to while ppeople exist in waiting list and while we still have books that we can deliver
@@ -306,9 +315,7 @@ void UserInterface::delivery(std::string fileIn){
                 //while is not empty
 
                 LinkedQueue<Person> current = currentBook->getWaitingList();
-                for (int i = 0; i < current.getSize(); ++i) {
-                    std::cout << " made it here?????" << std::endl;
-                    inquire(currentBook->getTitle());
+                for (int i = 0; i < current.getSize() && numberOfBooks>0; ++i) {
 
 //                }
 //

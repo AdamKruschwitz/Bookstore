@@ -39,6 +39,8 @@ public:
     int calculateRestock();
     LinkedQueue<Person> getWaitingList();
     void restock(int numNewCopies);
+
+    bool isEmpty();
 };
 
 #endif //RANDOMBOOKNAMEGENERATOR_BOOK_H
